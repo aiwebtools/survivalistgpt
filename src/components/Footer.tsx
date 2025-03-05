@@ -107,7 +107,14 @@ const Footer = () => {
 
         <div className="border-t border-survival-accent/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} AiWebTools.Ai. All rights reserved.
+            <a 
+              href="https://www.aiwebtools.ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-survival-accent transition-colors"
+            >
+              &copy; 2025 AI WEB TOOLS LLC All rights reserved.
+            </a>
           </p>
           <div className="flex space-x-6">
             <a 
