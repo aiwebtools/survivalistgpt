@@ -109,6 +109,11 @@ const Hero = () => {
                     ></iframe>
                   </div>
                 </div>
+                <div className="mt-3 text-center">
+                  <p className="text-sm md:text-base text-survival-brightAccent font-semibold">
+                    The Survivalist GPT Anthem
+                  </p>
+                </div>
               </div>
             </div>
           </div>
