@@ -1,14 +1,21 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ThreeDElement from './ThreeDElement';
 import { cn } from '@/lib/utils';
 import { Shield, Target, Map } from 'lucide-react';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     setIsLoaded(true);
+
+    // Set video quality and autoplay when component mounts
+    if (videoRef.current) {
+      const iframe = videoRef.current;
+      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080";
+    }
   }, []);
 
   return (
@@ -79,7 +86,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* 3D Element Side */}
+          {/* Video Element Side - Replacing the 3D Element */}
           <div className={cn(
             "transition-all duration-1000 delay-300",
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
@@ -89,9 +96,19 @@ const Hero = () => {
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-survival-accent/10 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-survival-brightAccent/5 rounded-full blur-2xl"></div>
               
-              {/* Main 3D element */}
-              <div className="relative z-10 max-w-sm mx-auto">
-                <ThreeDElement className="w-full h-full" />
+              {/* Main video element */}
+              <div className="relative z-10 mx-auto">
+                <div className="glass-panel p-2 rounded-xl shadow-2xl border border-survival-accent/30">
+                  <div className="rounded-lg overflow-hidden aspect-video">
+                    <iframe
+                      ref={videoRef}
+                      title="Survivalist GPT Demo"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-lg w-full h-full"
+                    ></iframe>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

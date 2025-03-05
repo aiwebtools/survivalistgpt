@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import useAnimateOnScroll from '@/hooks/useAnimateOnScroll';

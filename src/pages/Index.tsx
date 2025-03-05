@@ -43,7 +43,7 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        <VideoSection />
+        {/* VideoSection removed since we moved the video to Hero */}
         <Testimonials />
         <FAQ />
         <LegalDisclaimer />
