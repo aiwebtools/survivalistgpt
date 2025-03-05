@@ -2,15 +2,17 @@
 import { cn } from '@/lib/utils';
 import { Quote } from 'lucide-react';
 import useAnimateOnScroll from '@/hooks/useAnimateOnScroll';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface TestimonialCardProps {
   quote: string;
   name: string;
   title: string;
   delay: number;
+  imageSrc?: string;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, title, delay }) => {
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, title, delay, imageSrc }) => {
   const { ref, isVisible } = useAnimateOnScroll({ threshold: 0.1 });
   
   return (
@@ -19,16 +21,19 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, title, d
       className={cn(
         "glass-panel rounded-xl p-6 transition-all duration-700",
         "border border-survival-accent/20",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16",
-        `delay-[${delay}ms]`
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
       )}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       <Quote className="w-10 h-10 text-survival-accent/60 mb-4" />
       <p className="text-gray-300 mb-6">{quote}</p>
       <div className="flex items-center">
-        <div className="w-10 h-10 rounded-full bg-survival-accent/30 flex items-center justify-center">
-          <span className="text-white font-medium text-sm">{name.charAt(0)}</span>
-        </div>
+        <Avatar className="w-10 h-10 border border-survival-accent/30">
+          <AvatarImage src={imageSrc} alt={name} />
+          <AvatarFallback className="bg-survival-accent/30">
+            <span className="text-white font-medium text-sm">{name.charAt(0)}</span>
+          </AvatarFallback>
+        </Avatar>
         <div className="ml-3">
           <p className="text-white font-medium">{name}</p>
           <p className="text-sm text-gray-400">{title}</p>
@@ -67,18 +72,35 @@ const Testimonials = () => {
             name="Michael R."
             title="Wilderness Instructor"
             delay={100}
+            imageSrc="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
           />
           <TestimonialCard 
             quote="I was impressed by the depth of knowledge and the practical nature of the advice. The image analysis feature helped me correctly identify edible plants during my hiking trip."
             name="Sarah J."
             title="Outdoor Enthusiast"
             delay={200}
+            imageSrc="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
           />
           <TestimonialCard 
             quote="As someone with military experience, I found the battlefield guidance to be accurate and well-researched. The strategic planning capabilities are particularly valuable for training scenarios."
             name="James T."
             title="Former Military Personnel"
             delay={300}
+            imageSrc="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
+          />
+          <TestimonialCard 
+            quote="The emergency medical guidance saved my hiking partner when he suffered a severe injury miles from help. The clear instructions helped me stabilize him until rescue arrived."
+            name="Emma L."
+            title="Search and Rescue Volunteer"
+            delay={400}
+            imageSrc="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
+          />
+          <TestimonialCard 
+            quote="I've tested many survival tools, but Survivalist GPT stands out for its ability to adapt advice to specific environments. The climate-specific recommendations were invaluable during my expedition."
+            name="David K."
+            title="Adventure Journalist"
+            delay={500}
+            imageSrc="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
           />
         </div>
       </div>
