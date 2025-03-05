@@ -45,7 +45,7 @@ const Hero = () => {
                 <span className="block mt-2 text-white">Your AI Survival Expert</span>
               </h1>
               <p className="mt-4 text-lg text-gray-300 max-w-xl">
-                Comprehensive survival advice with a special focus on battlefield guidance, 
+                Comprehensive survival and battlefield guidance to ensure your absolute survival, 
                 equipped with image processing and web search capabilities.
               </p>
             </div>
