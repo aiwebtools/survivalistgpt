@@ -1,5 +1,5 @@
 
-import { AlertTriangle, Shield, Brain, Map, Target, Tree } from 'lucide-react';
+import { AlertTriangle, Shield, Brain, Map, Target, Trees } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useAnimateOnScroll from '@/hooks/useAnimateOnScroll';
 
@@ -84,7 +84,7 @@ const Features = () => {
           <FeatureCard 
             title="Wilderness Skills"
             description="Learn essential skills for surviving in natural environments, from shelter building to water purification."
-            icon={<Tree className="w-6 h-6" />}
+            icon={<Trees className="w-6 h-6" />}
             delay={500}
           />
           <FeatureCard 
