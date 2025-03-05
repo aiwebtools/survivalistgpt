@@ -1,5 +1,5 @@
 
-import { AlertTriangle, Shield, Brain, Map, Target, Trees } from 'lucide-react';
+import { AlertTriangle, Shield, Brain, Map, Target, Trees, Umbrella } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useAnimateOnScroll from '@/hooks/useAnimateOnScroll';
 
@@ -26,7 +26,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, del
         { "transition-delay-300": delay === 300 },
         { "transition-delay-400": delay === 400 },
         { "transition-delay-500": delay === 500 },
-        { "transition-delay-600": delay === 600 }
+        { "transition-delay-600": delay === 600 },
+        { "transition-delay-700": delay === 700 }
       )}
       style={{ transitionDelay: `${delay}ms` }} // Fallback inline style for the delay
     >
@@ -99,6 +100,12 @@ const Features = () => {
             description="Develop decision-making frameworks for high-stress situations based on historical knowledge and modern strategies."
             icon={<AlertTriangle className="w-6 h-6" />}
             delay={600}
+          />
+          <FeatureCard 
+            title="Disaster Preparedness"
+            description="Comprehensive training on preparing for natural disasters, emergency response protocols, and creating family safety plans."
+            icon={<Umbrella className="w-6 h-6" />}
+            delay={700}
           />
         </div>
       </div>
