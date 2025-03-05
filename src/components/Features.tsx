@@ -20,8 +20,15 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, del
         "card-3d glass-panel rounded-xl p-6 transition-all duration-700",
         "border border-survival-accent/20 hover:border-survival-accent/50",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16",
-        `delay-[${delay}ms]`
+        // Apply delay with inline style instead of Tailwind class
+        { "transition-delay-100": delay === 100 },
+        { "transition-delay-200": delay === 200 },
+        { "transition-delay-300": delay === 300 },
+        { "transition-delay-400": delay === 400 },
+        { "transition-delay-500": delay === 500 },
+        { "transition-delay-600": delay === 600 }
       )}
+      style={{ transitionDelay: `${delay}ms` }} // Fallback inline style for the delay
     >
       <div className="w-12 h-12 mb-4 rounded-lg bg-survival-accent/20 flex items-center justify-center">
         <div className="text-survival-brightAccent">{icon}</div>
