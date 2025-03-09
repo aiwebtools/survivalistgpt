@@ -2,25 +2,21 @@
 import { useEffect, useState, useRef } from 'react';
 import ThreeDElement from './ThreeDElement';
 import { cn } from '@/lib/utils';
-import { Shield, Target, Map, Play } from 'lucide-react';
+import { Shield, Target, Map } from 'lucide-react';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLIFrameElement>(null);
-  const thumbnailUrl = "https://img.youtube.com/vi/C_-odrCtJxs/maxresdefault.jpg";
 
   useEffect(() => {
     setIsLoaded(true);
-  }, []);
 
-  // Function to load the actual video when clicked
-  const loadVideo = () => {
-    setVideoLoaded(true);
+    // Set video quality and autoplay when component mounts
     if (videoRef.current) {
-      videoRef.current.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080";
+      const iframe = videoRef.current;
+      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080";
     }
-  };
+  }, []);
 
   return (
     <section className="relative min-h-screen pt-24 overflow-hidden">
@@ -90,7 +86,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Video Element Side - With Optimized Loading */}
+          {/* Video Element Side - Replacing the 3D Element */}
           <div className={cn(
             "transition-all duration-1000 delay-300",
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
@@ -100,37 +96,17 @@ const Hero = () => {
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-survival-accent/10 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-survival-brightAccent/5 rounded-full blur-2xl"></div>
               
-              {/* Main video element with thumbnail placeholder */}
+              {/* Main video element */}
               <div className="relative z-10 mx-auto">
                 <div className="glass-panel p-2 rounded-xl shadow-2xl border border-survival-accent/30">
                   <div className="rounded-lg overflow-hidden aspect-video">
-                    {!videoLoaded ? (
-                      <div 
-                        className="relative cursor-pointer w-full h-full" 
-                        onClick={loadVideo}
-                      >
-                        <img 
-                          src={thumbnailUrl} 
-                          alt="Video thumbnail" 
-                          className="w-full h-full object-cover rounded-lg"
-                          loading="eager"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="bg-survival-accent/70 rounded-full p-5 backdrop-blur-sm hover:bg-survival-brightAccent transition-colors">
-                            <Play className="w-8 h-8 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <iframe
-                        ref={videoRef}
-                        title="Survivalist GPT Demo"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-lg w-full h-full"
-                        loading="lazy"
-                      ></iframe>
-                    )}
+                    <iframe
+                      ref={videoRef}
+                      title="Survivalist GPT Demo"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-lg w-full h-full"
+                    ></iframe>
                   </div>
                 </div>
                 <div className="mt-3 text-center">
