@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import VideoSection from '@/components/VideoSection';
 import FAQ from '@/components/FAQ';
 import Testimonials from '@/components/Testimonials';
 import LegalDisclaimer from '@/components/LegalDisclaimer';
 import Footer from '@/components/Footer';
+import ConsentPopup from '@/components/ConsentPopup';
 
 const Index = () => {
   useEffect(() => {
@@ -43,12 +43,12 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        {/* VideoSection removed since we moved the video to Hero */}
         <Testimonials />
         <FAQ />
         <LegalDisclaimer />
       </main>
       <Footer />
+      <ConsentPopup />
     </div>
   );
 };
