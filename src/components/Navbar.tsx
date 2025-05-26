@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Star } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,9 +55,11 @@ const Navbar = () => {
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary text-xs px-4 py-2"
+            className="btn-secondary text-xs px-4 py-2 relative group"
           >
+            <Star className="w-4 h-4 mr-2 inline-block text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
             DOWNLOAD OPEN SOURCE PROMPT FOR LOCAL DEPLOYMENT
+            <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
           </a>
           <a
             href="https://www.aiwebtools.ai"
@@ -120,9 +122,11 @@ const Navbar = () => {
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary text-center text-xs"
+            className="btn-secondary text-center text-xs relative group"
           >
+            <Star className="w-4 h-4 mr-2 inline-block text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
             DOWNLOAD OPEN SOURCE PROMPT FOR LOCAL DEPLOYMENT
+            <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
           </a>
           <a
             href="https://www.aiwebtools.ai"
