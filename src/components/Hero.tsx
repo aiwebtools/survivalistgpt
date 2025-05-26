@@ -1,10 +1,7 @@
 
-import { useState } from 'react';
-import { AlertTriangle, Play, Star } from 'lucide-react';
+import { AlertTriangle, Star } from 'lucide-react';
 
 const Hero = () => {
-  const [showVideo, setShowVideo] = useState(false);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-survival-dark via-survival-dark to-survival-green/20">
       {/* Background Elements */}
@@ -82,32 +79,6 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">MORE AI TOOLS</span>
             </a>
-          </div>
-
-          {/* Video Section */}
-          <div className="relative max-w-3xl mx-auto animate-fade-in-up transition-delay-700">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-survival-accent/20">
-              {!showVideo ? (
-                <div className="relative bg-gradient-to-br from-survival-green/20 to-survival-dark aspect-video flex items-center justify-center cursor-pointer group"
-                     onClick={() => setShowVideo(true)}>
-                  <div className="absolute inset-0 bg-black/40"></div>
-                  <div className="relative z-10 text-center">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-survival-accent/20 backdrop-blur-sm border border-survival-accent/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Play className="w-8 h-8 text-white ml-1" />
-                    </div>
-                    <p className="text-white text-lg font-medium">Watch Survivalist GPT in Action</p>
-                  </div>
-                </div>
-              ) : (
-                <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                  title="Survivalist GPT Demo"
-                  className="w-full aspect-video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-            </div>
           </div>
         </div>
       </div>
