@@ -54,9 +54,12 @@ const Footer = () => {
                   href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-survival-accent transition-colors"
+                  className="relative inline-flex items-center px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transform hover:scale-110 transition-all duration-300 ease-out group overflow-hidden border-2 border-yellow-400/50 animate-pulse-soft"
                 >
-                  Use Survivalist GPT Now
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <AlertTriangle className="w-4 h-4 mr-2 relative z-10 text-yellow-100 group-hover:rotate-12 transition-transform animate-pulse" />
+                  <span className="relative z-10 font-extrabold tracking-wide">USE SURVIVALIST GPT NOW</span>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/30 to-red-400/30 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
               </li>
               <li>
@@ -145,9 +148,12 @@ const Footer = () => {
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-survival-accent transition-colors text-sm text-center"
+              className="relative inline-flex items-center px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transform hover:scale-110 transition-all duration-300 ease-out group overflow-hidden border border-yellow-400/50 animate-pulse-soft"
             >
-              USE SURVIVALIST GPT NOW
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <AlertTriangle className="w-3 h-3 mr-1 relative z-10 text-yellow-100 group-hover:rotate-12 transition-transform" />
+              <span className="relative z-10 font-extrabold">USE SURVIVALIST GPT NOW</span>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/30 to-red-400/30 blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <a 
               href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
