@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import useAnimateOnScroll from '@/hooks/useAnimateOnScroll';
@@ -7,10 +8,10 @@ const VideoSection = () => {
   const { ref, isVisible } = useAnimateOnScroll({ threshold: 0.1 });
 
   useEffect(() => {
-    // Set video quality and autoplay when component mounts
+    // Set video to autoplay unmuted in 1080p quality
     if (videoRef.current) {
       const iframe = videoRef.current;
-      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080";
+      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080&loop=1&playlist=C_-odrCtJxs";
     }
   }, []);
 

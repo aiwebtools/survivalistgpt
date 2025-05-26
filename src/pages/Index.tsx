@@ -9,6 +9,7 @@ import LegalDisclaimer from '@/components/LegalDisclaimer';
 import Footer from '@/components/Footer';
 import ConsentPopup from '@/components/ConsentPopup';
 import WaveBackground from '@/components/WaveBackground';
+import VideoSection from '@/components/VideoSection';
 
 const Index = () => {
   useEffect(() => {
@@ -44,6 +45,7 @@ const Index = () => {
       <Navbar />
       <main className="pt-20 relative z-10">
         <Hero />
+        <VideoSection />
         <Features />
         <Testimonials />
         <FAQ />
