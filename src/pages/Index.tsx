@@ -8,6 +8,7 @@ import Testimonials from '@/components/Testimonials';
 import LegalDisclaimer from '@/components/LegalDisclaimer';
 import Footer from '@/components/Footer';
 import ConsentPopup from '@/components/ConsentPopup';
+import WaveBackground from '@/components/WaveBackground';
 
 const Index = () => {
   useEffect(() => {
@@ -38,9 +39,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-survival-dark text-white overflow-hidden">
+    <div className="min-h-screen bg-survival-dark text-white overflow-hidden relative">
+      <WaveBackground />
       <Navbar />
-      <main className="pt-20">
+      <main className="pt-20 relative z-10">
         <Hero />
         <Features />
         <Testimonials />
