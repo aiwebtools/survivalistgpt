@@ -42,7 +42,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-4">
           <a
             href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
             target="_blank"
@@ -50,6 +50,14 @@ const Navbar = () => {
             className="btn-primary text-sm"
           >
             USE SURVIVALIST GPT NOW
+          </a>
+          <a
+            href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary text-xs px-4 py-2"
+          >
+            DOWNLOAD OPEN SOURCE PROMPT FOR LOCAL DEPLOYMENT
           </a>
           <a
             href="https://www.aiwebtools.ai"
@@ -95,7 +103,7 @@ const Navbar = () => {
         className={cn(
           'md:hidden absolute top-full left-0 right-0 bg-survival-dark/95 backdrop-blur-md transition-all duration-300 ease-in-out border-t border-survival-accent/20',
           isMobileMenuOpen
-            ? 'max-h-[200px] opacity-100 border-opacity-100'
+            ? 'max-h-[300px] opacity-100 border-opacity-100'
             : 'max-h-0 opacity-0 border-opacity-0 pointer-events-none'
         )}
       >
@@ -107,6 +115,14 @@ const Navbar = () => {
             className="btn-primary text-center text-sm"
           >
             USE SURVIVALIST GPT NOW
+          </a>
+          <a
+            href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary text-center text-xs"
+          >
+            DOWNLOAD OPEN SOURCE PROMPT FOR LOCAL DEPLOYMENT
           </a>
           <a
             href="https://www.aiwebtools.ai"
