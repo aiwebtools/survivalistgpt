@@ -17,28 +17,30 @@ const Footer = () => {
                 <p className="text-xs text-red-400">Made with love ❤️</p>
               </div>
             </div>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-400 max-w-md mb-6">
               Your AI-powered survival expert, providing comprehensive guidance for battlefield scenarios 
               and wilderness survival with advanced capabilities including image processing and web search.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <a 
                 href="https://www.aiwebtools.ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-survival-accent/20 text-survival-accent hover:bg-survival-accent/30 transition-colors"
+                className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
               >
-                More AI Tools
+                <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">More AI Tools</span>
               </a>
               <a 
                 href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-survival-accent/20 text-survival-accent hover:bg-survival-accent/30 transition-colors relative group"
+                className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full shadow-lg hover:shadow-xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-yellow-400/30"
               >
-                <Star className="w-4 h-4 mr-2 text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
-                Download Open Source Prompt
-                <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Star className="w-4 h-4 mr-2 relative z-10 text-yellow-200 group-hover:text-white transition-colors animate-pulse-soft" />
+                <span className="relative z-10">Download Open Source Prompt</span>
+                <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
             </div>
           </div>
@@ -138,12 +140,12 @@ const Footer = () => {
               &copy; 2025 AI WEB TOOLS LLC All rights reserved.
             </a>
           </p>
-          <div className="flex space-x-6">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
             <a 
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-survival-accent transition-colors text-sm"
+              className="text-gray-400 hover:text-survival-accent transition-colors text-sm text-center"
             >
               USE SURVIVALIST GPT NOW
             </a>
@@ -151,7 +153,7 @@ const Footer = () => {
               href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-survival-accent transition-colors text-sm flex items-center"
+              className="text-gray-400 hover:text-survival-accent transition-colors text-sm flex items-center justify-center"
             >
               <Star className="w-3 h-3 mr-1 text-yellow-400 animate-pulse-soft" />
               DOWNLOAD PROMPT
@@ -160,7 +162,7 @@ const Footer = () => {
               href="https://www.aiwebtools.ai" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-survival-accent transition-colors text-sm"
+              className="text-gray-400 hover:text-survival-accent transition-colors text-sm text-center"
             >
               MORE AI TOOLS
             </a>
@@ -175,12 +177,11 @@ const Footer = () => {
           target="_blank" 
           rel="noopener noreferrer"
           className={cn(
-            "flex items-center justify-center px-4 py-3 rounded-full",
-            "bg-survival-accent text-white shadow-lg hover:bg-survival-brightAccent",
-            "transition-all duration-300 transform hover:scale-105"
+            "relative inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-survival-accent to-survival-brightAccent rounded-full shadow-xl hover:shadow-2xl hover:shadow-survival-accent/30 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
           )}
         >
-          More AI Tools
+          <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <span className="relative z-10">More AI Tools</span>
         </a>
       </div>
     </footer>

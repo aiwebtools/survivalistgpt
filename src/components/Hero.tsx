@@ -54,30 +54,33 @@ const Hero = () => {
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-lg px-8 py-4 inline-flex items-center group w-full sm:w-auto"
+              className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-survival-accent to-survival-brightAccent rounded-full shadow-xl hover:shadow-2xl hover:shadow-survival-accent/30 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden"
             >
-              USE SURVIVALIST GPT NOW
-              <AlertTriangle className="ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10">USE SURVIVALIST GPT NOW</span>
+              <AlertTriangle className="ml-3 w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
             </a>
             
             <a
               href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary text-lg px-8 py-4 inline-flex items-center group w-full sm:w-auto relative"
+              className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full shadow-xl hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden border border-yellow-400/30"
             >
-              <Star className="w-5 h-5 mr-2 text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
-              DOWNLOAD OPEN SOURCE PROMPT
-              <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Star className="w-5 h-5 mr-3 relative z-10 text-yellow-200 group-hover:text-white transition-colors animate-pulse-soft" />
+              <span className="relative z-10">DOWNLOAD OPEN SOURCE PROMPT</span>
+              <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             
             <a
               href="https://www.aiwebtools.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary text-lg px-8 py-4 inline-flex items-center w-full sm:w-auto"
+              className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-xl hover:shadow-2xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden"
             >
-              MORE AI TOOLS
+              <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10">MORE AI TOOLS</span>
             </a>
           </div>
 
