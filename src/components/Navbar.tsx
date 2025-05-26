@@ -37,6 +37,7 @@ const Navbar = () => {
             <div className="ml-2">
               <h1 className="text-lg font-bold text-white">Survivalist GPT</h1>
               <p className="text-xs text-gray-400">Presented by AiWebTools.Ai</p>
+              <p className="text-xs text-red-400">Made with love ❤️</p>
             </div>
           </div>
         </a>

@@ -14,6 +14,7 @@ const Footer = () => {
               <div>
                 <h2 className="text-xl font-bold text-white">Survivalist GPT</h2>
                 <p className="text-xs text-gray-400">Presented by AiWebTools.Ai</p>
+                <p className="text-xs text-red-400">Made with love ❤️</p>
               </div>
             </div>
             <p className="text-gray-400 max-w-md">
