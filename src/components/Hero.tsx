@@ -1,135 +1,116 @@
 
-import { useEffect, useState, useRef } from 'react';
-import ThreeDElement from './ThreeDElement';
-import { cn } from '@/lib/utils';
-import { Shield, Target, Map } from 'lucide-react';
+import { useState } from 'react';
+import { AlertTriangle, Play, Star } from 'lucide-react';
 
 const Hero = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const videoRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    setIsLoaded(true);
-
-    // Set video quality and autoplay when component mounts
-    if (videoRef.current) {
-      const iframe = videoRef.current;
-      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080";
-    }
-  }, []);
+  const [showVideo, setShowVideo] = useState(false);
 
   return (
-    <section className="relative min-h-screen pt-24 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-survival-dark via-survival-dark to-survival-green/20">
       {/* Background Elements */}
-      <div className="absolute inset-0 z-[-1]">
-        <div className="absolute inset-0 bg-survival-dark"></div>
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-survival-accent to-transparent"></div>
-        <div className="bg-noise-overlay"></div>
+      <div className="absolute inset-0 bg-noise-overlay"></div>
+      
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-survival-accent/20 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 5}s`,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Hero Content */}
-      <div className="container mx-auto px-4 md:px-6 pt-16 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className={cn(
-            "flex flex-col space-y-6 transition-all duration-1000",
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          )}>
-            <div>
-              <div className="chip mb-4">
-                <Shield className="w-3 h-3 mr-1" />
-                <span>Advanced Battlefield & Survival Guidance</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="gradient-text shadow-survival-accent text-glow">Survivalist GPT</span>
-                <span className="block mt-2 text-white">Your AI Survival Expert</span>
-              </h1>
-              <p className="mt-4 text-lg text-gray-300 max-w-xl">
-                Comprehensive survival and battlefield guidance to ensure your absolute survival, 
-                equipped with image processing and web search capabilities.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4 mt-8">
-              <a
-                href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                USE SURVIVALIST GPT NOW
-              </a>
-              <a
-                href="https://www.aiwebtools.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                MORE AI TOOLS
-              </a>
-            </div>
-
-            {/* Feature badges */}
-            <div className="flex flex-wrap gap-4 mt-8">
-              <div className="flex items-center space-x-2 glass-panel px-4 py-2 rounded-full">
-                <Target className="w-4 h-4 text-survival-brightAccent" />
-                <span className="text-sm text-gray-300">Tactical Guidance</span>
-              </div>
-              <div className="flex items-center space-x-2 glass-panel px-4 py-2 rounded-full">
-                <Map className="w-4 h-4 text-survival-brightAccent" />
-                <span className="text-sm text-gray-300">Survival Techniques</span>
-              </div>
-              <div className="flex items-center space-x-2 glass-panel px-4 py-2 rounded-full">
-                <Shield className="w-4 h-4 text-survival-brightAccent" />
-                <span className="text-sm text-gray-300">Safety Protocols</span>
-              </div>
-            </div>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Hero Badge */}
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-survival-accent/20 border border-survival-accent/30 backdrop-blur-sm mb-8 animate-fade-in">
+            <AlertTriangle className="w-4 h-4 text-survival-accent mr-2" />
+            <span className="text-survival-brightAccent text-sm font-medium">
+              Advanced Battlefield & Survival Guidance
+            </span>
           </div>
 
-          {/* Video Element Side - Replacing the 3D Element */}
-          <div className={cn(
-            "transition-all duration-1000 delay-300",
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          )}>
-            <div className="relative">
-              {/* Decorative elements */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-survival-accent/10 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-survival-brightAccent/5 rounded-full blur-2xl"></div>
-              
-              {/* Main video element */}
-              <div className="relative z-10 mx-auto">
-                <div className="glass-panel p-2 rounded-xl shadow-2xl border border-survival-accent/30">
-                  <div className="rounded-lg overflow-hidden aspect-video">
-                    <iframe
-                      ref={videoRef}
-                      title="Survivalist GPT Demo"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="rounded-lg w-full h-full"
-                    ></iframe>
+          {/* Main Heading */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up transition-delay-200">
+            <span className="text-white block mb-2">Survivalist GPT</span>
+            <span className="gradient-text">Your AI Survival Expert</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up transition-delay-400">
+            Comprehensive survival and battlefield guidance to ensure your absolute survival, 
+            equipped with image processing and web search capabilities.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-up transition-delay-600">
+            <a
+              href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-lg px-8 py-4 inline-flex items-center group w-full sm:w-auto"
+            >
+              USE SURVIVALIST GPT NOW
+              <AlertTriangle className="ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+            </a>
+            
+            <a
+              href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary text-lg px-8 py-4 inline-flex items-center group w-full sm:w-auto relative"
+            >
+              <Star className="w-5 h-5 mr-2 text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
+              DOWNLOAD OPEN SOURCE PROMPT
+              <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+            </a>
+            
+            <a
+              href="https://www.aiwebtools.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary text-lg px-8 py-4 inline-flex items-center w-full sm:w-auto"
+            >
+              MORE AI TOOLS
+            </a>
+          </div>
+
+          {/* Video Section */}
+          <div className="relative max-w-3xl mx-auto animate-fade-in-up transition-delay-700">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-survival-accent/20">
+              {!showVideo ? (
+                <div className="relative bg-gradient-to-br from-survival-green/20 to-survival-dark aspect-video flex items-center justify-center cursor-pointer group"
+                     onClick={() => setShowVideo(true)}>
+                  <div className="absolute inset-0 bg-black/40"></div>
+                  <div className="relative z-10 text-center">
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-survival-accent/20 backdrop-blur-sm border border-survival-accent/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Play className="w-8 h-8 text-white ml-1" />
+                    </div>
+                    <p className="text-white text-lg font-medium">Watch Survivalist GPT in Action</p>
                   </div>
                 </div>
-                <div className="mt-3 text-center">
-                  <p className="text-sm md:text-base text-survival-brightAccent font-semibold">
-                    The Survivalist GPT Anthem
-                  </p>
-                </div>
-              </div>
+              ) : (
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                  title="Survivalist GPT Demo"
+                  className="w-full aspect-video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom wave divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full">
-          <path 
-            fill="#1B5E20" 
-            fillOpacity="0.2" 
-            d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,42.7C840,32,960,32,1080,37.3C1200,43,1320,53,1380,58.7L1440,64L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"
-          ></path>
-        </svg>
-      </div>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-survival-dark to-transparent"></div>
     </section>
   );
 };

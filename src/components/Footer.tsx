@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Mail, Phone } from 'lucide-react';
+import { AlertTriangle, Mail, Phone, Star } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -20,7 +20,7 @@ const Footer = () => {
               Your AI-powered survival expert, providing comprehensive guidance for battlefield scenarios 
               and wilderness survival with advanced capabilities including image processing and web search.
             </p>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-3">
               <a 
                 href="https://www.aiwebtools.ai" 
                 target="_blank" 
@@ -28,6 +28,16 @@ const Footer = () => {
                 className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-survival-accent/20 text-survival-accent hover:bg-survival-accent/30 transition-colors"
               >
                 More AI Tools
+              </a>
+              <a 
+                href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-survival-accent/20 text-survival-accent hover:bg-survival-accent/30 transition-colors relative group"
+              >
+                <Star className="w-4 h-4 mr-2 text-yellow-400 animate-pulse-soft drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
+                Download Open Source Prompt
+                <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </a>
             </div>
           </div>
@@ -44,6 +54,17 @@ const Footer = () => {
                   className="text-gray-400 hover:text-survival-accent transition-colors"
                 >
                   Use Survivalist GPT Now
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-survival-accent transition-colors flex items-center"
+                >
+                  <Star className="w-3 h-3 mr-1 text-yellow-400 animate-pulse-soft" />
+                  Download Open Source Prompt
                 </a>
               </li>
               <li>
@@ -124,6 +145,15 @@ const Footer = () => {
               className="text-gray-400 hover:text-survival-accent transition-colors text-sm"
             >
               USE SURVIVALIST GPT NOW
+            </a>
+            <a 
+              href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-survival-accent transition-colors text-sm flex items-center"
+            >
+              <Star className="w-3 h-3 mr-1 text-yellow-400 animate-pulse-soft" />
+              DOWNLOAD PROMPT
             </a>
             <a 
               href="https://www.aiwebtools.ai" 
