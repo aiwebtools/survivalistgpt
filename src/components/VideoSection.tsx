@@ -11,7 +11,7 @@ const VideoSection = () => {
     // Set video to autoplay unmuted in 1080p quality
     if (videoRef.current) {
       const iframe = videoRef.current;
-      iframe.src = "https://www.youtube.com/embed/C_-odrCtJxs?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080&loop=1&playlist=C_-odrCtJxs";
+      iframe.src = "https://www.youtube.com/embed/RX6W8KC0y18?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&vq=hd1080&loop=1&playlist=RX6W8KC0y18";
     }
   }, []);
 
