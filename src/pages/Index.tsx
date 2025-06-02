@@ -10,7 +10,6 @@ import Footer from '@/components/Footer';
 import ConsentPopup from '@/components/ConsentPopup';
 import WaveBackground from '@/components/WaveBackground';
 import VideoSection from '@/components/VideoSection';
-import DivineParticles from '@/components/DivineParticles';
 
 const Index = () => {
   useEffect(() => {
@@ -26,7 +25,7 @@ const Index = () => {
         
         if (targetElement) {
           window.scrollTo({
-            top: targetElement.offsetTop - 120, // Increased offset for better spacing
+            top: targetElement.offsetTop - 100, // Offset for header
             behavior: 'smooth'
           });
         }
@@ -41,11 +40,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white overflow-hidden relative">
+    <div className="min-h-screen bg-survival-dark text-white overflow-hidden relative">
       <WaveBackground />
-      <DivineParticles />
       <Navbar />
-      <main className="pt-24 relative z-10">
+      <main className="pt-20 relative z-10">
         <Hero />
         <VideoSection />
         <Features />
