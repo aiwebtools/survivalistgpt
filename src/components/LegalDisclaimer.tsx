@@ -9,6 +9,13 @@ const LegalDisclaimer = () => {
   return (
     <section className="py-12 relative bg-survival-dark/95 border-t border-survival-accent/20">
       <div className="container mx-auto px-4 md:px-6">
+        {/* Small disclaimer at the top */}
+        <div className="max-w-4xl mx-auto mb-6">
+          <p className="text-center text-sm text-gray-400 italic">
+            Informational, educational, and research purposes only.
+          </p>
+        </div>
+        
         <div 
           ref={ref as React.RefObject<HTMLDivElement>}
           className={cn(
