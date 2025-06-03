@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import ConsentPopup from '@/components/ConsentPopup';
 import WaveBackground from '@/components/WaveBackground';
 import VideoSection from '@/components/VideoSection';
+import SEOSitemap from '@/components/SEOSitemap';
 
 const Index = () => {
   useEffect(() => {
@@ -41,6 +42,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-survival-dark text-white overflow-hidden relative">
+      <SEOSitemap />
       <WaveBackground />
       <Navbar />
       <main className="pt-20 relative z-10">
