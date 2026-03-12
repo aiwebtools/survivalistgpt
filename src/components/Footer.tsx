@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Mail, Phone, Star } from 'lucide-react';
+import { AlertTriangle, Mail, Phone, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -21,15 +21,25 @@ const Footer = () => {
               Your AI-powered survival expert, providing comprehensive guidance for battlefield scenarios 
               and wilderness survival with advanced capabilities including image processing and web search.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
               <a 
-                href="https://www.aiwebtools.ai" 
+                href="https://aiwebtools.lovable.app/?via=aiwebtools" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10">More AI Tools</span>
+              </a>
+              <a 
+                href="https://aidoctorgpt.lovable.app/?via=aiwebtools" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-lg hover:shadow-xl hover:shadow-cyan-500/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-cyan-400/30"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Stethoscope className="w-4 h-4 mr-2 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
+                <span className="relative z-10">Free Doctor GPT</span>
               </a>
               <a 
                 href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
@@ -64,6 +74,28 @@ const Footer = () => {
               </li>
               <li>
                 <a 
+                  href="https://aidoctorgpt.lovable.app/?via=aiwebtools" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center"
+                >
+                  <Stethoscope className="w-3 h-3 mr-1 text-cyan-400" />
+                  Free Doctor GPT
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://ozio.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:text-green-300 transition-colors flex items-center"
+                >
+                  <Pill className="w-3 h-3 mr-1 text-green-400" />
+                  Antibiotics - No Prescription Needed
+                </a>
+              </li>
+              <li>
+                <a 
                   href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
                   target="_blank" 
                   rel="noopener noreferrer"
@@ -75,7 +107,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://www.aiwebtools.ai" 
+                  href="https://aiwebtools.lovable.app/?via=aiwebtools" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-survival-accent transition-colors"
@@ -135,7 +167,7 @@ const Footer = () => {
         <div className="border-t border-survival-accent/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-survival-accent transition-colors"
@@ -156,6 +188,15 @@ const Footer = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/30 to-red-400/30 blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <a 
+              href="https://aidoctorgpt.lovable.app/?via=aiwebtools" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm flex items-center justify-center"
+            >
+              <Stethoscope className="w-3 h-3 mr-1" />
+              FREE DOCTOR GPT
+            </a>
+            <a 
               href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
               target="_blank" 
               rel="noopener noreferrer"
@@ -165,7 +206,7 @@ const Footer = () => {
               DOWNLOAD PROMPT
             </a>
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-survival-accent transition-colors text-sm text-center"
@@ -179,7 +220,7 @@ const Footer = () => {
       {/* Floating "More AI Tools" button */}
       <div className="fixed bottom-6 right-6 z-30">
         <a 
-          href="https://www.aiwebtools.ai" 
+          href="https://aiwebtools.lovable.app/?via=aiwebtools" 
           target="_blank" 
           rel="noopener noreferrer"
           className={cn(

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Star } from 'lucide-react';
+import { AlertTriangle, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,6 +54,26 @@ const Navbar = () => {
             <span className="relative z-10">USE SURVIVALIST GPT NOW</span>
           </a>
           <a
+            href="https://aidoctorgpt.lovable.app/?via=aiwebtools"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-flex items-center justify-center px-5 py-3 text-xs font-medium text-white bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-lg hover:shadow-xl hover:shadow-cyan-500/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-cyan-400/30"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Stethoscope className="w-4 h-4 mr-2 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
+            <span className="relative z-10">FREE DOCTOR GPT</span>
+          </a>
+          <a
+            href="https://ozio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-flex items-center justify-center px-5 py-3 text-xs font-medium text-white bg-gradient-to-r from-emerald-600 to-green-500 rounded-full shadow-lg hover:shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-green-400/30"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Pill className="w-4 h-4 mr-2 relative z-10 text-green-200 group-hover:text-white transition-colors" />
+            <span className="relative z-10">ANTIBIOTICS - NO RX</span>
+          </a>
+          <a
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
             target="_blank"
             rel="noopener noreferrer"
@@ -65,7 +85,7 @@ const Navbar = () => {
             <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
-            href="https://www.aiwebtools.ai"
+            href="https://aiwebtools.lovable.app/?via=aiwebtools"
             target="_blank"
             rel="noopener noreferrer"
             className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
@@ -109,7 +129,7 @@ const Navbar = () => {
         className={cn(
           'lg:hidden absolute top-full left-0 right-0 bg-survival-dark transition-all duration-300 ease-in-out border-t border-survival-accent/30 shadow-lg',
           isMobileMenuOpen
-            ? 'max-h-[400px] opacity-100 border-opacity-100'
+            ? 'max-h-[600px] opacity-100 border-opacity-100'
             : 'max-h-0 opacity-0 border-opacity-0 pointer-events-none'
         )}
       >
@@ -125,6 +145,28 @@ const Navbar = () => {
             <span className="relative z-10">USE SURVIVALIST GPT NOW</span>
           </a>
           <a
+            href="https://aidoctorgpt.lovable.app/?via=aiwebtools"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-flex items-center justify-center w-full px-6 py-4 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl shadow-lg hover:shadow-xl hover:shadow-cyan-500/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-cyan-400/30"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Stethoscope className="w-5 h-5 mr-3 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
+            <span className="relative z-10">FREE DOCTOR GPT</span>
+          </a>
+          <a
+            href="https://ozio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-flex items-center justify-center w-full px-6 py-4 text-sm font-medium text-white bg-gradient-to-r from-emerald-600 to-green-500 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-green-400/30"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Pill className="w-5 h-5 mr-3 relative z-10 text-green-200 group-hover:text-white transition-colors" />
+            <span className="relative z-10">ANTIBIOTICS - NO PRESCRIPTION NEEDED</span>
+          </a>
+          <a
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
             target="_blank"
             rel="noopener noreferrer"
@@ -137,7 +179,7 @@ const Navbar = () => {
             <div className="absolute inset-0 rounded-xl bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
-            href="https://www.aiwebtools.ai"
+            href="https://aiwebtools.lovable.app/?via=aiwebtools"
             target="_blank"
             rel="noopener noreferrer"
             className="relative inline-flex items-center justify-center w-full px-6 py-4 text-base font-medium text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-xl border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
