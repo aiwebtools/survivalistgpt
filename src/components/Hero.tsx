@@ -1,5 +1,5 @@
 
-import { AlertTriangle, Star } from 'lucide-react';
+import { AlertTriangle, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -47,7 +47,7 @@ const Hero = () => {
           </header>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-up transition-delay-600">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in-up transition-delay-600">
             <a
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
               target="_blank"
@@ -58,6 +58,18 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">USE FREE AI SURVIVAL TOOLS NOW</span>
               <AlertTriangle className="ml-3 w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
+            </a>
+            
+            <a
+              href="https://aidoctorgpt.lovable.app/?via=aiwebtools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-xl hover:shadow-2xl hover:shadow-cyan-500/30 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden border border-cyan-400/30"
+              aria-label="Free Doctor GPT - AI Medical Information"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Stethoscope className="w-5 h-5 mr-3 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
+              <span className="relative z-10">FREE DOCTOR GPT</span>
             </a>
             
             <a
@@ -74,7 +86,7 @@ const Hero = () => {
             </a>
             
             <a
-              href="https://www.aiwebtools.ai"
+              href="https://aiwebtools.lovable.app/?via=aiwebtools"
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-xl hover:shadow-2xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden"
@@ -82,6 +94,28 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">MORE FREE AI TOOLS</span>
+            </a>
+          </div>
+
+          {/* Antibiotics Promo Card */}
+          <div className="max-w-lg mx-auto mb-16 animate-fade-in-up transition-delay-700">
+            <a
+              href="https://ozio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block relative p-6 rounded-2xl bg-gradient-to-br from-emerald-900/60 to-green-800/40 border border-green-500/30 backdrop-blur-sm shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transform hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+              <div className="relative z-10 flex items-center gap-4">
+                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                  <Pill className="w-7 h-7 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-lg font-bold text-white mb-1">Antibiotics — No Prescription Needed</h3>
+                  <p className="text-green-300 text-sm mb-2">Essential survival preparedness. Stock up on antibiotics without a prescription.</p>
+                  <p className="text-yellow-300 text-xs font-semibold">🏷️ Use promo code <span className="bg-yellow-400/20 px-2 py-0.5 rounded text-yellow-200 font-bold">PREPPER</span> for 10% off your first order</p>
+                </div>
+              </div>
             </a>
           </div>
 
