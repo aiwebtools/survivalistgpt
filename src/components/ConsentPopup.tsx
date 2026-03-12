@@ -38,6 +38,7 @@ const ConsentPopup = () => {
       title: "Agreement Accepted",
       description: "Thank you for agreeing to use Survivalist GPT responsibly.",
       variant: "default",
+      duration: 2000,
     });
   };
 
