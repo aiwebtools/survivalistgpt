@@ -242,7 +242,7 @@ const Footer = () => {
       </div>
 
       {/* Floating "More AI Tools" button */}
-      <div className="fixed bottom-6 right-6 z-30">
+      <div className="fixed bottom-6 right-6 z-30 hidden md:block">
         <a 
           href="https://aiwebtools.lovable.app/?via=aiwebtools" 
           target="_blank" 
