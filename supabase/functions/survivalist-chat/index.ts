@@ -242,7 +242,9 @@ Deno.serve(async (request) => {
 
   if (!gatewayResponse.ok) {
     const body = await gatewayResponse.text()
-    const message = safeMessageFromErrorBody(body, 'Survivalist GPT could not complete this request.')
+    const message = gatewayResponse.status === 402 || gatewayResponse.status === 429
+      ? 'Sorry master, community AI credits have run out for today. Please try the Survivalist GPT (CHATGPT version) while credits reset.'
+      : safeMessageFromErrorBody(body, 'Survivalist GPT could not complete this request.')
     return json({ message }, gatewayResponse.status)
   }
 
