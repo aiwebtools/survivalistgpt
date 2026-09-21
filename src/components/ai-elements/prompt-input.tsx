@@ -66,6 +66,7 @@ import type {
 import {
   Children,
   createContext,
+  forwardRef,
   useCallback,
   useContext,
   useEffect,
@@ -1124,18 +1125,19 @@ export type PromptInputButtonProps = ComponentProps<typeof InputGroupButton> & {
   tooltip?: PromptInputButtonTooltip;
 };
 
-export const PromptInputButton = ({
+export const PromptInputButton = forwardRef<HTMLButtonElement, PromptInputButtonProps>(({
   variant = "ghost",
   className,
   size,
   tooltip,
   ...props
-}: PromptInputButtonProps) => {
+}, ref) => {
   const newSize =
     size ?? (Children.count(props.children) > 1 ? "sm" : "icon-sm");
 
   const button = (
     <InputGroupButton
+      ref={ref}
       className={cn(className)}
       size={newSize}
       type="button"
@@ -1164,7 +1166,8 @@ export const PromptInputButton = ({
       </TooltipContent>
     </Tooltip>
   );
-};
+});
+PromptInputButton.displayName = "PromptInputButton";
 
 export type PromptInputActionMenuProps = ComponentProps<typeof DropdownMenu>;
 export const PromptInputActionMenu = (props: PromptInputActionMenuProps) => (
