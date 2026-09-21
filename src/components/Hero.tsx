@@ -1,5 +1,5 @@
 
-import { AlertTriangle, Star, Stethoscope, Pill } from 'lucide-react';
+import { AlertTriangle, MessageCircle, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -48,6 +48,15 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in-up transition-delay-600">
+            <a
+              href="/chat"
+              className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-extrabold text-survival-dark bg-gradient-to-r from-survival-brightAccent via-survival-accent to-yellow-300 rounded-full shadow-2xl hover:shadow-survival-brightAccent/40 transform hover:scale-105 transition-all duration-300 ease-out group w-full sm:w-auto overflow-hidden border border-survival-brightAccent/40"
+              aria-label="Chat with Survivalist GPT AI"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <MessageCircle className="mr-3 w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
+              <span className="relative z-10">CHAT WITH SURVIVALIST GPT AI NOW</span>
+            </a>
             <a
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
               target="_blank"

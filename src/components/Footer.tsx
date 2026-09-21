@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Mail, Phone, Star, Stethoscope, Pill } from 'lucide-react';
+import { AlertTriangle, Mail, MessageCircle, Phone, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -22,6 +22,14 @@ const Footer = () => {
               and wilderness survival with advanced capabilities including image processing and web search.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+              <a 
+                href="/chat" 
+                className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-extrabold text-survival-dark bg-gradient-to-r from-survival-brightAccent via-survival-accent to-yellow-300 rounded-full shadow-xl hover:shadow-2xl hover:shadow-survival-brightAccent/30 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-survival-brightAccent/40"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <MessageCircle className="w-4 h-4 mr-2 relative z-10" />
+                <span className="relative z-10">Chat With AI</span>
+              </a>
               <a 
                 href="https://aiwebtools.lovable.app/?via=aiwebtools" 
                 target="_blank" 
@@ -59,6 +67,15 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
+              <li>
+                <a 
+                  href="/chat" 
+                  className="text-survival-brightAccent hover:text-survival-accent transition-colors flex items-center font-semibold"
+                >
+                  <MessageCircle className="w-3 h-3 mr-1" />
+                  Chat With Survivalist GPT AI
+                </a>
+              </li>
               <li>
                 <a 
                   href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
@@ -176,6 +193,13 @@ const Footer = () => {
             </a>
           </p>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
+            <a 
+              href="/chat" 
+              className="text-survival-brightAccent hover:text-survival-accent transition-colors text-sm flex items-center justify-center font-semibold"
+            >
+              <MessageCircle className="w-3 h-3 mr-1" />
+              CHAT WITH AI
+            </a>
             <a 
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
               target="_blank" 
