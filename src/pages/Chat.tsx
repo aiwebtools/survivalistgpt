@@ -9,7 +9,7 @@ const Chat = () => {
     <div className="relative min-h-screen overflow-hidden bg-survival-dark text-foreground">
       <WaveBackground />
       <Navbar />
-      <main className="relative z-10 px-3 pb-8 pt-24 md:px-6 md:pt-28">
+      <main className="relative z-10 px-3 pb-8 pt-28 md:px-6 md:pt-28">
         <SurvivalistChat />
       </main>
       <Footer />
