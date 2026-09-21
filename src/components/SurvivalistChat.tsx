@@ -53,6 +53,12 @@ const starterPrompts = [
   'Search for current guidance on safe water purification.',
 ];
 
+const CHATGPT_SURVIVALIST_URL = 'https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt';
+
+function isCreditFallbackStatus(status: number) {
+  return status === 402 || status === 429;
+}
+
 function createId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
@@ -137,6 +143,7 @@ export default function SurvivalistChat() {
   const [messages, setMessages] = useState<UIMessage[]>([]);
   const [status, setStatus] = useState<ChatStatus>('ready');
   const [reasoningByMessage, setReasoningByMessage] = useState<Record<string, string>>({});
+  const [creditFallbackByMessage, setCreditFallbackByMessage] = useState<Record<string, boolean>>({});
   const abortRef = useRef<AbortController | null>(null);
 
   const isBusy = status === 'submitted' || status === 'streaming';
@@ -215,9 +222,15 @@ export default function SurvivalistChat() {
 
         if (!response.ok) {
           const errorBody = await response.json().catch(() => null);
-          const message = typeof errorBody?.message === 'string'
-            ? errorBody.message
-            : 'Survivalist GPT could not complete this request.';
+          const isCreditFallback = isCreditFallbackStatus(response.status);
+          const message = isCreditFallback
+            ? 'Sorry master, community AI credits have run out for today. Please try the Survivalist GPT (CHATGPT version) while credits reset.'
+            : typeof errorBody?.message === 'string'
+              ? errorBody.message
+              : 'Survivalist GPT could not complete this request.';
+          if (isCreditFallback) {
+            setCreditFallbackByMessage((current) => ({ ...current, [assistantId]: true }));
+          }
           updateAssistantText(assistantId, message);
           setStatus('error');
           return;
@@ -382,6 +395,7 @@ export default function SurvivalistChat() {
             messages.map((message) => {
               const text = getText(message);
               const reasoning = reasoningByMessage[message.id]?.trim();
+              const showCreditFallback = creditFallbackByMessage[message.id];
               const isAssistantLoading = message.role === 'assistant' && !text && isBusy;
 
               return (
@@ -408,6 +422,16 @@ export default function SurvivalistChat() {
                         {text}
                       </MessageResponse>
                     )}
+                    {showCreditFallback ? (
+                      <a
+                        href={CHATGPT_SURVIVALIST_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center justify-center rounded-full border border-survival-brightAccent/40 bg-gradient-to-r from-survival-brightAccent via-survival-accent to-yellow-300 px-5 py-3 text-sm font-extrabold text-survival-dark shadow-xl shadow-survival-accent/20 transition-transform hover:scale-105"
+                      >
+                        Survivalist GPT (CHATGPT version)
+                      </a>
+                    ) : null}
                   </MessageContent>
                 </Message>
               );

@@ -28,7 +28,7 @@ const Footer = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <MessageCircle className="w-4 h-4 mr-2 relative z-10" />
-                <span className="relative z-10">Chat With AI</span>
+                <span className="relative z-10">Survivalist GPT (InSite Version)</span>
               </a>
               <a 
                 href="https://aiwebtools.lovable.app/?via=aiwebtools" 
@@ -37,7 +37,7 @@ const Footer = () => {
                 className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10">More AI Tools</span>
+                <span className="relative z-10">AI Web Tools (External Hub)</span>
               </a>
               <a 
                 href="https://aidoctorgpt.lovable.app/?via=aiwebtools" 
@@ -47,7 +47,7 @@ const Footer = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Stethoscope className="w-4 h-4 mr-2 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
-                <span className="relative z-10">Free Doctor GPT</span>
+                <span className="relative z-10">Doctor GPT (External Version)</span>
               </a>
               <a 
                 href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
@@ -57,7 +57,7 @@ const Footer = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Star className="w-4 h-4 mr-2 relative z-10 text-yellow-200 group-hover:text-white transition-colors animate-pulse-soft" />
-                <span className="relative z-10">Download Open Source Prompt</span>
+                <span className="relative z-10">Prompt Doc (External Version)</span>
                 <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
             </div>
@@ -73,7 +73,7 @@ const Footer = () => {
                   className="text-survival-brightAccent hover:text-survival-accent transition-colors flex items-center font-semibold"
                 >
                   <MessageCircle className="w-3 h-3 mr-1" />
-                  Chat With Survivalist GPT AI
+                  Survivalist GPT (InSite Version)
                 </a>
               </li>
               <li>
@@ -85,7 +85,7 @@ const Footer = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <AlertTriangle className="w-4 h-4 mr-2 relative z-10 text-yellow-100 group-hover:rotate-12 transition-transform animate-pulse" />
-                  <span className="relative z-10 font-extrabold tracking-wide">USE SURVIVALIST GPT NOW</span>
+                  <span className="relative z-10 font-extrabold tracking-wide">SURVIVALIST GPT (CHATGPT VERSION)</span>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/30 to-red-400/30 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
               </li>
@@ -97,7 +97,7 @@ const Footer = () => {
                   className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center"
                 >
                   <Stethoscope className="w-3 h-3 mr-1 text-cyan-400" />
-                  Free Doctor GPT
+                  Doctor GPT (External Version)
                 </a>
               </li>
               <li>
@@ -108,7 +108,7 @@ const Footer = () => {
                   className="text-green-400 hover:text-green-300 transition-colors flex items-center"
                 >
                   <Pill className="w-3 h-3 mr-1 text-green-400" />
-                  Antibiotics - No Prescription Needed
+                  Antibiotics (External Partner)
                 </a>
               </li>
               <li>
@@ -119,7 +119,7 @@ const Footer = () => {
                   className="text-gray-400 hover:text-survival-accent transition-colors flex items-center"
                 >
                   <Star className="w-3 h-3 mr-1 text-yellow-400 animate-pulse-soft" />
-                  Download Open Source Prompt
+                  Prompt Doc (External Version)
                 </a>
               </li>
               <li>
@@ -129,7 +129,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-survival-accent transition-colors"
                 >
-                  More AI Tools
+                  AI Web Tools (External Hub)
                 </a>
               </li>
               <li>
@@ -198,7 +198,7 @@ const Footer = () => {
               className="text-survival-brightAccent hover:text-survival-accent transition-colors text-sm flex items-center justify-center font-semibold"
             >
               <MessageCircle className="w-3 h-3 mr-1" />
-              CHAT WITH AI
+              SURVIVALIST GPT (INSITE VERSION)
             </a>
             <a 
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt" 
@@ -208,7 +208,7 @@ const Footer = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <AlertTriangle className="w-3 h-3 mr-1 relative z-10 text-yellow-100 group-hover:rotate-12 transition-transform" />
-              <span className="relative z-10 font-extrabold">USE SURVIVALIST GPT NOW</span>
+              <span className="relative z-10 font-extrabold">SURVIVALIST GPT (CHATGPT VERSION)</span>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/30 to-red-400/30 blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <a 
@@ -218,7 +218,7 @@ const Footer = () => {
               className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm flex items-center justify-center"
             >
               <Stethoscope className="w-3 h-3 mr-1" />
-              FREE DOCTOR GPT
+              DOCTOR GPT (EXTERNAL VERSION)
             </a>
             <a 
               href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub" 
@@ -227,7 +227,7 @@ const Footer = () => {
               className="text-gray-400 hover:text-survival-accent transition-colors text-sm flex items-center justify-center"
             >
               <Star className="w-3 h-3 mr-1 text-yellow-400 animate-pulse-soft" />
-              DOWNLOAD PROMPT
+              PROMPT DOC (EXTERNAL VERSION)
             </a>
             <a 
               href="https://aiwebtools.lovable.app/?via=aiwebtools" 
@@ -235,7 +235,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-survival-accent transition-colors text-sm text-center"
             >
-              MORE AI TOOLS
+              AI WEB TOOLS (EXTERNAL HUB)
             </a>
           </div>
         </div>
@@ -252,7 +252,7 @@ const Footer = () => {
           )}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <span className="relative z-10">More AI Tools</span>
+          <span className="relative z-10">AI Web Tools (External Hub)</span>
         </a>
       </div>
     </footer>

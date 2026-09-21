@@ -1,0 +1,3 @@
+- [ ] Label every visible in-site and external tool button clearly.
+- [ ] Add a friendly community-credit fallback with a ChatGPT version button.
+- [ ] Verify original tool links remain present and working.

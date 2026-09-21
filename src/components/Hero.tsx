@@ -55,7 +55,7 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <MessageCircle className="mr-3 w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
-              <span className="relative z-10">CHAT WITH SURVIVALIST GPT AI NOW</span>
+              <span className="relative z-10">SURVIVALIST GPT (INSITE VERSION)</span>
             </a>
             <a
               href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
@@ -65,7 +65,7 @@ const Hero = () => {
               aria-label="Use Survivalist GPT - Free AI Survival Tools"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10">USE FREE AI SURVIVAL TOOLS NOW</span>
+              <span className="relative z-10">SURVIVALIST GPT (CHATGPT VERSION)</span>
               <AlertTriangle className="ml-3 w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
             </a>
             
@@ -78,7 +78,7 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <Stethoscope className="w-5 h-5 mr-3 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
-              <span className="relative z-10">FREE DOCTOR GPT</span>
+              <span className="relative z-10">DOCTOR GPT (EXTERNAL VERSION)</span>
             </a>
             
             <a
@@ -90,7 +90,7 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <Star className="w-5 h-5 mr-3 relative z-10 text-yellow-200 group-hover:text-white transition-colors animate-pulse-soft" />
-              <span className="relative z-10">DOWNLOAD FREE OPEN SOURCE PROMPT</span>
+              <span className="relative z-10">PROMPT DOC (EXTERNAL VERSION)</span>
               <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             
@@ -102,7 +102,7 @@ const Hero = () => {
               aria-label="More Free AI Tools by AI Web Tools"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10">MORE FREE AI TOOLS</span>
+              <span className="relative z-10">AI WEB TOOLS (EXTERNAL HUB)</span>
             </a>
           </div>
 
@@ -120,7 +120,7 @@ const Hero = () => {
                   <Pill className="w-7 h-7 text-white" />
                 </div>
                 <div className="text-left">
-                  <h3 className="text-lg font-bold text-white mb-1">Antibiotics — No Prescription Needed</h3>
+                  <h3 className="text-lg font-bold text-white mb-1">Antibiotics (External Partner)</h3>
                   <p className="text-green-300 text-sm mb-2">Essential survival preparedness. Stock up on antibiotics without a prescription.</p>
                   <p className="text-yellow-300 text-xs font-semibold">🏷️ Use promo code <span className="bg-yellow-400/20 px-2 py-0.5 rounded text-yellow-200 font-bold">PREPPER</span> for 10% off your first order</p>
                 </div>

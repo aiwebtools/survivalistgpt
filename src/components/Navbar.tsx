@@ -50,7 +50,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <MessageCircle className="w-4 h-4 mr-2 relative z-10" />
-            <span className="relative z-10">CHAT WITH AI NOW</span>
+            <span className="relative z-10">SURVIVALIST GPT (INSITE VERSION)</span>
           </a>
           <a
             href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
@@ -59,7 +59,7 @@ const Navbar = () => {
             className="relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-survival-accent to-survival-brightAccent rounded-full shadow-lg hover:shadow-xl hover:shadow-survival-accent/25 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10">USE SURVIVALIST GPT NOW</span>
+            <span className="relative z-10">SURVIVALIST GPT (CHATGPT VERSION)</span>
           </a>
           <a
             href="https://aidoctorgpt.lovable.app/?via=aiwebtools"
@@ -69,7 +69,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Stethoscope className="w-4 h-4 mr-2 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10">FREE DOCTOR GPT</span>
+            <span className="relative z-10">DOCTOR GPT (EXTERNAL VERSION)</span>
           </a>
           <a
             href="https://ozio.com/"
@@ -79,7 +79,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Pill className="w-4 h-4 mr-2 relative z-10 text-green-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10">ANTIBIOTICS - NO RX</span>
+            <span className="relative z-10">ANTIBIOTICS (EXTERNAL PARTNER)</span>
           </a>
           <a
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
@@ -89,7 +89,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Star className="w-4 h-4 mr-2 relative z-10 text-yellow-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10">DOWNLOAD OPEN SOURCE PROMPT</span>
+            <span className="relative z-10">PROMPT DOC (EXTERNAL VERSION)</span>
             <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
@@ -99,7 +99,7 @@ const Navbar = () => {
             className="relative inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-survival-metal to-survival-dark rounded-full border border-survival-accent/30 shadow-lg hover:shadow-xl hover:shadow-survival-accent/20 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10">MORE AI TOOLS</span>
+            <span className="relative z-10">AI WEB TOOLS (EXTERNAL HUB)</span>
           </a>
         </nav>
 
@@ -149,7 +149,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <MessageCircle className="w-5 h-5 mr-3 relative z-10" />
-            <span className="relative z-10">CHAT WITH SURVIVALIST GPT AI NOW</span>
+            <span className="relative z-10">SURVIVALIST GPT (INSITE VERSION)</span>
           </a>
           <a
             href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
@@ -159,7 +159,7 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10">USE SURVIVALIST GPT NOW</span>
+            <span className="relative z-10">SURVIVALIST GPT (CHATGPT VERSION)</span>
           </a>
           <a
             href="https://aidoctorgpt.lovable.app/?via=aiwebtools"
@@ -170,7 +170,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Stethoscope className="w-5 h-5 mr-3 relative z-10 text-cyan-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10">FREE DOCTOR GPT</span>
+            <span className="relative z-10">DOCTOR GPT (EXTERNAL VERSION)</span>
           </a>
           <a
             href="https://ozio.com/"
@@ -181,7 +181,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Pill className="w-5 h-5 mr-3 relative z-10 text-green-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10">ANTIBIOTICS - NO PRESCRIPTION NEEDED</span>
+            <span className="relative z-10">ANTIBIOTICS (EXTERNAL PARTNER)</span>
           </a>
           <a
             href="https://docs.google.com/document/d/e/2PACX-1vTEt3ZfmBvY6GU_57TqL26ODSe1qpKWOnzq3cDjHjeS3qBbqGINPAyxlxAdE8v39LhJYpYdDo3d8m9e/pub"
@@ -192,7 +192,7 @@ const Navbar = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Star className="w-5 h-5 mr-3 relative z-10 text-yellow-200 group-hover:text-white transition-colors" />
-            <span className="relative z-10 text-center">DOWNLOAD OPEN SOURCE PROMPT FOR LOCAL DEPLOYMENT</span>
+            <span className="relative z-10 text-center">PROMPT DOC (EXTERNAL VERSION)</span>
             <div className="absolute inset-0 rounded-xl bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
@@ -203,7 +203,7 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-survival-accent/20 to-survival-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10">MORE AI TOOLS</span>
+            <span className="relative z-10">AI WEB TOOLS (EXTERNAL HUB)</span>
           </a>
         </div>
       </div>
