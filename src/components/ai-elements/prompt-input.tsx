@@ -66,6 +66,7 @@ import type {
 import {
   Children,
   createContext,
+  forwardRef,
   useCallback,
   useContext,
   useEffect,
@@ -155,7 +156,7 @@ const captureScreenshot = async (): Promise<File | null> => {
 
     const timestamp = new Date()
       .toISOString()
-      .replaceAll(/[:.]/g, "-")
+      .replace(/[:.]/g, "-")
       .replace("T", "_")
       .replace("Z", "");
 
@@ -1002,7 +1003,7 @@ export const PromptInputTextarea = ({
         attachments.files.length > 0
       ) {
         e.preventDefault();
-        const lastAttachment = attachments.files.at(-1);
+        const lastAttachment = attachments.files[attachments.files.length - 1];
         if (lastAttachment) {
           attachments.remove(lastAttachment.id);
         }
@@ -1124,18 +1125,19 @@ export type PromptInputButtonProps = ComponentProps<typeof InputGroupButton> & {
   tooltip?: PromptInputButtonTooltip;
 };
 
-export const PromptInputButton = ({
+export const PromptInputButton = forwardRef<HTMLButtonElement, PromptInputButtonProps>(({
   variant = "ghost",
   className,
   size,
   tooltip,
   ...props
-}: PromptInputButtonProps) => {
+}, ref) => {
   const newSize =
     size ?? (Children.count(props.children) > 1 ? "sm" : "icon-sm");
 
   const button = (
     <InputGroupButton
+      ref={ref}
       className={cn(className)}
       size={newSize}
       type="button"
@@ -1164,7 +1166,8 @@ export const PromptInputButton = ({
       </TooltipContent>
     </Tooltip>
   );
-};
+});
+PromptInputButton.displayName = "PromptInputButton";
 
 export type PromptInputActionMenuProps = ComponentProps<typeof DropdownMenu>;
 export const PromptInputActionMenu = (props: PromptInputActionMenuProps) => (

@@ -33,12 +33,12 @@ const ConsentPopup = () => {
     // Close the dialog
     setOpen(false);
     
-    // Show a success toast
+    // Show a brief success toast.
     toast({
       title: "Agreement Accepted",
       description: "Thank you for agreeing to use Survivalist GPT responsibly.",
       variant: "default",
-      duration: 2000,
+      duration: 1200,
     });
   };
 

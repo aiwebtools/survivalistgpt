@@ -306,7 +306,7 @@ export default function SurvivalistChat() {
   );
 
   return (
-    <section className="relative mx-auto flex h-[calc(100vh-7rem)] max-w-6xl flex-col overflow-hidden rounded-2xl border border-survival-accent/25 bg-survival-dark/90 shadow-2xl shadow-survival-accent/10 backdrop-blur-xl md:h-[calc(100vh-8rem)]">
+    <section className="relative mx-auto flex min-h-[46rem] max-w-6xl flex-col overflow-hidden rounded-2xl border border-survival-accent/25 bg-survival-dark/90 shadow-2xl shadow-survival-accent/10 backdrop-blur-xl md:h-[calc(100vh-8rem)] md:min-h-[44rem]">
       <div className="relative border-b border-survival-accent/20 bg-gradient-to-r from-survival-dark via-secondary/80 to-survival-dark px-4 py-4 md:px-6">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-survival-brightAccent to-transparent" />
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -340,14 +340,14 @@ export default function SurvivalistChat() {
       </div>
 
       <Conversation className="min-h-0 flex-1 bg-gradient-to-b from-survival-dark/80 to-background/95">
-        <ConversationContent className="gap-6 px-4 py-6 md:px-6">
+        <ConversationContent className="gap-6 px-4 py-6 pb-8 md:px-6">
           {messages.length === 0 ? (
-            <ConversationEmptyState className="min-h-[38rem] text-foreground">
-              <div className="flex max-w-3xl flex-col items-center gap-6">
+            <ConversationEmptyState className="min-h-[28rem] text-foreground md:min-h-[34rem]">
+              <div className="flex max-w-3xl flex-col items-center gap-4 md:gap-6">
                 <img
                   src={survivalistMark}
                   alt="Survivalist GPT"
-                  className="h-28 w-28 rounded-2xl border border-survival-accent/30 bg-background object-cover shadow-2xl shadow-survival-accent/20"
+                  className="h-20 w-20 rounded-2xl border border-survival-accent/30 bg-background object-cover shadow-2xl shadow-survival-accent/20 md:h-28 md:w-28"
                   width={1024}
                   height={1024}
                   loading="eager"
@@ -357,7 +357,7 @@ export default function SurvivalistChat() {
                     <Compass className="mr-2 h-4 w-4" />
                     Ask questions. Get structured survival guidance.
                   </div>
-                  <h2 className="text-3xl font-bold md:text-5xl">Your AI Survival Expert</h2>
+                  <h2 className="text-2xl font-bold md:text-5xl">Your AI Survival Expert</h2>
                   <p className="mx-auto max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
                     Upload an image, request current web research, or describe the situation. Survivalist GPT will outline, clarify, and guide toward lawful life-preserving actions.
                   </p>
@@ -433,7 +433,7 @@ export default function SurvivalistChat() {
           >
             <AttachmentPreview />
             <PromptInputTextarea
-              className="min-h-24 px-4 text-base text-foreground placeholder:text-muted-foreground"
+              className="min-h-20 px-4 text-base text-foreground placeholder:text-muted-foreground md:min-h-24"
               placeholder="Ask about survival, preparedness, evacuation, image analysis, or current web research..."
               disabled={isBusy}
             />

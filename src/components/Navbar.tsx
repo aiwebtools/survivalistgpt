@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Star, Stethoscope, Pill } from 'lucide-react';
+import { AlertTriangle, MessageCircle, Star, Stethoscope, Pill } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,6 +44,14 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-3">
+          <a
+            href="/chat"
+            className="relative inline-flex items-center justify-center px-6 py-3 text-sm font-extrabold text-survival-dark bg-gradient-to-r from-survival-brightAccent via-survival-accent to-yellow-300 rounded-full shadow-xl hover:shadow-2xl hover:shadow-survival-brightAccent/30 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-survival-brightAccent/40"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <MessageCircle className="w-4 h-4 mr-2 relative z-10" />
+            <span className="relative z-10">CHAT WITH AI NOW</span>
+          </a>
           <a
             href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
             target="_blank"
@@ -134,6 +142,15 @@ const Navbar = () => {
         )}
       >
         <div className="container mx-auto px-4 py-6 flex flex-col space-y-4">
+          <a
+            href="/chat"
+            className="relative inline-flex items-center justify-center w-full px-6 py-4 text-base font-extrabold text-survival-dark bg-gradient-to-r from-survival-brightAccent via-survival-accent to-yellow-300 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-survival-brightAccent/30 transform hover:scale-105 transition-all duration-300 ease-out group overflow-hidden border border-survival-brightAccent/40"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-survival-brightAccent to-survival-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <MessageCircle className="w-5 h-5 mr-3 relative z-10" />
+            <span className="relative z-10">CHAT WITH SURVIVALIST GPT AI NOW</span>
+          </a>
           <a
             href="https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt"
             target="_blank"
