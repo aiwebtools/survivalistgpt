@@ -1,6 +1,6 @@
 - [x] Label every visible in-site and external tool button clearly.
 - [x] Add a friendly community-credit fallback with a ChatGPT version button.
 - [x] Verify original tool links remain present and working.
-- [ ] Restyle the in-site AI as a rugged tactical field terminal.
-- [ ] Add functional physical lever switches for web intel, deep briefing, and low-light display.
-- [ ] Verify the command hub on desktop and mobile without changing existing links or chat behavior.
+- [x] Restyle the in-site AI as a rugged tactical field terminal.
+- [x] Add functional physical lever switches for web intel, deep briefing, and low-light display.
+- [x] Verify the command hub on desktop and mobile without changing existing links or chat behavior.
