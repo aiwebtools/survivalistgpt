@@ -282,9 +282,10 @@ export default function SurvivalistChat() {
           signal: controller.signal,
         });
 
-        if (!response.ok) {
+        const isJsonReply = (response.headers.get('Content-Type') ?? '').includes('application/json');
+        if (!response.ok || isJsonReply) {
           const errorBody = await response.json().catch(() => null);
-          const isCreditFallback = isCreditFallbackStatus(response.status);
+          const isCreditFallback = isCreditFallbackStatus(response.status) || errorBody?.creditFallback === true;
           const message = isCreditFallback
             ? 'Sorry master, community AI credits have run out for today. Please try the Survivalist GPT (CHATGPT version) while credits reset.'
             : typeof errorBody?.message === 'string'

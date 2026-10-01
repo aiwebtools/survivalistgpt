@@ -242,9 +242,14 @@ Deno.serve(async (request) => {
 
   if (!gatewayResponse.ok) {
     const body = await gatewayResponse.text()
-    const message = gatewayResponse.status === 402 || gatewayResponse.status === 429
-      ? 'Sorry master, community AI credits have run out for today. Please try the Survivalist GPT (CHATGPT version) while credits reset.'
-      : safeMessageFromErrorBody(body, 'Survivalist GPT could not complete this request.')
+    if (gatewayResponse.status === 402 || gatewayResponse.status === 429) {
+      // Expected state: return 200 so the app shows the friendly fallback instead of an error.
+      return json({
+        creditFallback: true,
+        message: 'Sorry master, community AI credits have run out for today. Please try the Survivalist GPT (CHATGPT version) while credits reset.',
+      })
+    }
+    const message = safeMessageFromErrorBody(body, 'Survivalist GPT could not complete this request.')
     return json({ message }, gatewayResponse.status)
   }
 
