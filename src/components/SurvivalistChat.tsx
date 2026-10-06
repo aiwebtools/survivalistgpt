@@ -596,6 +596,7 @@ export default function SurvivalistChat() {
             <LeverSwitch checked={commandModes.webIntel} label="Web intel" onCheckedChange={(checked) => setMode('webIntel', checked)} />
             <LeverSwitch checked={commandModes.deepBrief} label="Deep brief" onCheckedChange={(checked) => setMode('deepBrief', checked)} />
             <LeverSwitch checked={commandModes.lowLight} label="Low light" onCheckedChange={(checked) => setMode('lowLight', checked)} />
+            <LeverSwitch checked={commandModes.infographic} label="Infographic" onCheckedChange={(checked) => setMode('infographic', checked)} />
           </div>
           <div className="mt-auto space-y-3 border-t border-border pt-4 font-mono text-[9px] uppercase text-muted-foreground">
             <div className="flex justify-between"><span>Uplink</span><span className="text-survival-accent">Encrypted</span></div>
@@ -766,7 +767,6 @@ export default function SurvivalistChat() {
             <AttachmentPreview />
             <PromptInputTextarea
               id="survivalist-command-input"
-              autoFocus
               className="min-h-16 px-4 py-3 text-base text-foreground placeholder:text-muted-foreground md:min-h-24"
                placeholder={commandModes.infographic ? 'Describe the survival infographic you need…' : commandModes.webIntel ? 'Type your survival question — current web search is on…' : 'Type your survival question here…'}
               disabled={isBusy}

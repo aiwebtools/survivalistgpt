@@ -246,6 +246,26 @@
   .command-radar-blip-two { @apply bottom-1/4 right-1/3; animation: command-pulse 1.4s ease-in-out infinite; }
   .command-alert-lamp { @apply h-2 w-2 shrink-0 rounded-full bg-destructive; box-shadow: 0 0 8px hsl(var(--destructive)); animation: command-alert 2.6s steps(2) infinite; }
   .command-transmit { box-shadow: inset 0 -3px 0 hsl(var(--primary) / 0.45), 0 0 18px hsl(var(--command-glow) / 0.2); }
+  .command-composer {
+    background-image: linear-gradient(110deg, transparent 20%, hsl(var(--command-glow) / 0.05), transparent 80%);
+  }
+}
+
+@media (max-width: 639px) {
+  .command-hub {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-radius: 0.25rem;
+  }
+  .command-switch-bay {
+    min-width: 0;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .command-switch-label {
+    white-space: normal;
+    letter-spacing: 0.04em;
+  }
 }
 
 @keyframes command-radar { to { transform: rotate(360deg); } }
