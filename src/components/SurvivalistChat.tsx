@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createParser } from 'eventsource-parser';
 import type { ChatStatus, FileUIPart, UIMessage } from 'ai';
 import {
   Conversation,
@@ -14,6 +15,7 @@ import {
   PromptInputActionMenu,
   PromptInputActionMenuContent,
   PromptInputActionMenuTrigger,
+  PromptInputButton,
   PromptInputFooter,
   PromptInputHeader,
   PromptInputProvider,
@@ -21,6 +23,7 @@ import {
   PromptInputTextarea,
   PromptInputTools,
   type PromptInputMessage,
+  usePromptInputController,
   usePromptInputAttachments,
 } from '@/components/ai-elements/prompt-input';
 import { Shimmer } from '@/components/ai-elements/shimmer';
@@ -28,22 +31,31 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { recordWav } from '@/lib/record-wav';
+import { streamImage } from '@/lib/stream-image';
+import { streamSpeech } from '@/lib/stream-speech';
 import survivalistMark from '@/assets/survivalist-chat-mark.png';
 import {
   AlertTriangle,
   Camera,
+  ChevronDown,
   Crosshair,
   Compass,
   Gauge,
   ImageIcon,
   Layers3,
   MessageCircle,
+  Mic,
   Radio,
   Satellite,
   Search,
   ShieldCheck,
   Signal,
+  SlidersHorizontal,
+  Square,
   Trash2,
+  Volume2,
+  WandSparkles,
   Zap,
   X,
 } from 'lucide-react';
@@ -54,10 +66,10 @@ type ChatEvent = {
 };
 
 const starterPrompts = [
-  'Create a 72-hour emergency plan for my household.',
-  'Analyze an evacuation route and ask what details you need.',
-  'Build a survival kit checklist for storm season.',
-  'Search for current guidance on safe water purification.',
+  { label: '72-hour plan', prompt: 'Create a 72-hour emergency plan for my household.' },
+  { label: 'Evacuation route', prompt: 'Analyze an evacuation route and ask what details you need.' },
+  { label: 'Survival kit', prompt: 'Build a survival kit checklist for storm season.' },
+  { label: 'Safe water', prompt: 'Search for current guidance on safe water purification.' },
 ];
 
 const CHATGPT_SURVIVALIST_URL = 'https://chatgpt.com/g/g-9hq2xSwvf-survivalist-gpt';
@@ -66,7 +78,18 @@ type CommandModes = {
   webIntel: boolean;
   deepBrief: boolean;
   lowLight: boolean;
+  infographic: boolean;
 };
+
+type Recorder = Awaited<ReturnType<typeof recordWav>>;
+
+function cloudEndpoint(name: string) {
+  return `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/${name}`;
+}
+
+function cloudHeaders() {
+  return { apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY };
+}
 
 function isCreditFallbackStatus(status: number) {
   return status === 402 || status === 429;
@@ -113,18 +136,112 @@ function AttachmentPreview() {
               <ImageIcon className="h-5 w-5 text-survival-accent" />
             )}
             <span className="max-w-32 truncate">{file.filename ?? 'image'}</span>
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="icon"
               onClick={() => attachments.remove(file.id)}
-              className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-destructive/20 hover:text-destructive-foreground"
+              className="h-11 w-11 shrink-0 text-muted-foreground hover:bg-destructive/20 hover:text-destructive-foreground"
               aria-label="Remove uploaded image"
             >
-              <X className="h-3.5 w-3.5" />
-            </button>
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         ))}
       </div>
     </PromptInputHeader>
+  );
+}
+
+function VoiceInputControl({ disabled }: { disabled: boolean }) {
+  const { textInput } = usePromptInputController();
+  const { toast } = useToast();
+  const recorderRef = useRef<Recorder | null>(null);
+  const [voiceState, setVoiceState] = useState<'idle' | 'recording' | 'transcribing'>('idle');
+
+  const toggleRecording = useCallback(async () => {
+    if (voiceState === 'transcribing') return;
+    if (voiceState === 'idle') {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        toast({ title: 'Voice input unavailable', description: 'This browser does not support microphone recording.' });
+        return;
+      }
+      try {
+        recorderRef.current = await recordWav();
+        setVoiceState('recording');
+      } catch (error) {
+        const denied = error instanceof DOMException && error.name === 'NotAllowedError';
+        toast({
+          title: denied ? 'Microphone permission needed' : 'Could not start recording',
+          description: denied ? 'Allow microphone access, then tap Voice again.' : 'Check your microphone and try again.',
+        });
+      }
+      return;
+    }
+
+    const recorder = recorderRef.current;
+    recorderRef.current = null;
+    if (!recorder) return;
+    setVoiceState('transcribing');
+    try {
+      const file = await recorder.stop();
+      const form = new FormData();
+      form.append('file', file, file.name);
+      const response = await fetch(cloudEndpoint('survivalist-transcribe'), {
+        method: 'POST',
+        headers: cloudHeaders(),
+        body: form,
+      });
+      if (!response.ok || !response.body) {
+        const body = await response.json().catch(() => null);
+        throw new Error(typeof body?.message === 'string' ? body.message : 'Voice transcription failed.');
+      }
+      let transcript = '';
+      let finalText = '';
+      let streamError = '';
+      const parser = createParser({
+        onEvent(event) {
+          const payload = JSON.parse(event.data) as { type?: string; delta?: string; text?: string; error?: { message?: string } };
+          if (payload.type === 'error' || payload.error) streamError = payload.error?.message ?? 'Voice transcription failed.';
+          if (payload.type === 'transcript.text.delta' && payload.delta) transcript += payload.delta;
+          if (payload.type === 'transcript.text.done' && payload.text) finalText = payload.text;
+        },
+      });
+      const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+      while (true) {
+        const chunk = await reader.read();
+        if (chunk.done) break;
+        parser.feed(chunk.value);
+      }
+      parser.reset({ consume: true });
+      if (streamError) throw new Error(streamError);
+      const result = (finalText || transcript).trim();
+      if (!result) throw new Error('No speech was detected. Please try again.');
+      textInput.setInput([textInput.value.trim(), result].filter(Boolean).join(' '));
+    } catch (error) {
+      toast({ title: 'Voice input failed', description: error instanceof Error ? error.message : 'Please record again.' });
+    } finally {
+      setVoiceState('idle');
+    }
+  }, [textInput, toast, voiceState]);
+
+  useEffect(() => () => {
+    if (recorderRef.current) void recorderRef.current.stop().catch(() => undefined);
+  }, []);
+
+  return (
+    <PromptInputButton
+      type="button"
+      size="sm"
+      disabled={disabled || voiceState === 'transcribing'}
+      onClick={toggleRecording}
+      tooltip={voiceState === 'recording' ? 'Stop and transcribe' : 'Record voice message'}
+      aria-label={voiceState === 'recording' ? 'Stop recording' : 'Record voice message'}
+      className={cn('h-11 min-w-11 px-3 font-semibold', voiceState === 'recording' && 'bg-destructive text-destructive-foreground animate-pulse')}
+    >
+      {voiceState === 'recording' ? <Square /> : <Mic />}
+      <span className="hidden sm:inline">{voiceState === 'transcribing' ? 'Transcribing' : voiceState === 'recording' ? 'Stop' : 'Voice'}</span>
+    </PromptInputButton>
   );
 }
 
@@ -195,10 +312,14 @@ export default function SurvivalistChat() {
   const [status, setStatus] = useState<ChatStatus>('ready');
   const [reasoningByMessage, setReasoningByMessage] = useState<Record<string, string>>({});
   const [creditFallbackByMessage, setCreditFallbackByMessage] = useState<Record<string, boolean>>({});
+  const [infographicByMessage, setInfographicByMessage] = useState<Record<string, { url: string; final: boolean }>>({});
+  const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
+  const speechAbortRef = useRef<AbortController | null>(null);
   const [commandModes, setCommandModes] = useState<CommandModes>({
     webIntel: true,
     deepBrief: true,
     lowLight: false,
+    infographic: false,
   });
   const abortRef = useRef<AbortController | null>(null);
 
@@ -264,6 +385,25 @@ export default function SurvivalistChat() {
       abortRef.current = controller;
 
       try {
+        if (commandModes.infographic) {
+          if (files.length > 0) {
+            updateAssistantText(assistantId, 'Infographic mode currently creates a new visual from your written request. Turn it off to analyze uploaded images.');
+            setStatus('error');
+            return;
+          }
+          updateAssistantText(assistantId, 'Generating your field-ready survival infographic…');
+          await streamImage(
+            cloudEndpoint('survivalist-infographic'),
+            trimmed,
+            cloudHeaders(),
+            (url, final) => setInfographicByMessage((current) => ({ ...current, [assistantId]: { url, final } })),
+            controller.signal,
+          );
+          setMessages((current) => current.map((message) => message.id === assistantId ? { ...message, parts: [{ type: 'text', text: 'Your survival infographic is ready.' }] } : message));
+          setStatus('ready');
+          return;
+        }
+
         const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
         const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
         const response = await fetch(`${cloudUrl}/functions/v1/survivalist-chat`, {
@@ -358,7 +498,7 @@ export default function SurvivalistChat() {
         abortRef.current = null;
       }
     },
-    [appendReasoning, commandModes.deepBrief, commandModes.webIntel, isBusy, messages, requestMessages, updateAssistantText]
+    [appendReasoning, commandModes.deepBrief, commandModes.infographic, commandModes.webIntel, isBusy, messages, requestMessages, updateAssistantText]
   );
 
   const handleSubmit = useCallback(
@@ -371,6 +511,31 @@ export default function SurvivalistChat() {
   const stop = useCallback(() => {
     abortRef.current?.abort();
   }, []);
+
+  const toggleSpeech = useCallback(async (messageId: string, text: string) => {
+    if (speakingMessageId === messageId) {
+      speechAbortRef.current?.abort();
+      speechAbortRef.current = null;
+      setSpeakingMessageId(null);
+      return;
+    }
+    speechAbortRef.current?.abort();
+    const controller = new AbortController();
+    speechAbortRef.current = controller;
+    setSpeakingMessageId(messageId);
+    try {
+      await streamSpeech(cloudEndpoint('survivalist-speech'), text, cloudHeaders(), controller.signal);
+    } catch (error) {
+      if (!(error instanceof DOMException && error.name === 'AbortError')) {
+        toast({ title: 'Spoken reply unavailable', description: error instanceof Error ? error.message : 'Please try again.' });
+      }
+    } finally {
+      if (speechAbortRef.current === controller) {
+        speechAbortRef.current = null;
+        setSpeakingMessageId(null);
+      }
+    }
+  }, [speakingMessageId, toast]);
 
   const headerStats = useMemo(
     () => [
@@ -386,18 +551,18 @@ export default function SurvivalistChat() {
   }, []);
 
   return (
-    <section className={cn('command-hub relative mx-auto flex min-h-[46rem] max-w-7xl flex-col overflow-hidden rounded-lg border-[3px] border-border bg-survival-dark/95 md:h-[calc(100vh-8rem)] md:min-h-[44rem]', commandModes.lowLight && 'is-low-light')}>
+    <section className={cn('command-hub relative mx-auto flex h-[calc(100dvh-7rem)] min-h-[36rem] max-w-7xl flex-col overflow-hidden rounded-lg border-[3px] border-border bg-survival-dark/95 md:h-[calc(100vh-8rem)] md:min-h-[44rem]', commandModes.lowLight && 'is-low-light')}>
       <div className="command-scanlines pointer-events-none absolute inset-0 z-30" aria-hidden="true" />
       <span className="command-corner command-corner-tl" /><span className="command-corner command-corner-tr" />
       <span className="command-corner command-corner-bl" /><span className="command-corner command-corner-br" />
 
-      <div className="relative z-20 border-b-2 border-border bg-background/95 px-4 py-3 md:px-5">
+      <div className="relative z-20 border-b-2 border-border bg-background/95 px-3 py-2 md:px-5 md:py-3">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <img
               src={survivalistMark}
               alt="Survivalist GPT"
-               className="h-12 w-12 rounded border border-survival-accent/40 bg-background object-cover shadow-lg shadow-survival-accent/20"
+               className="h-10 w-10 rounded border border-survival-accent/40 bg-background object-cover shadow-lg shadow-survival-accent/20 md:h-12 md:w-12"
               width={1024}
               height={1024}
               loading="eager"
@@ -407,11 +572,11 @@ export default function SurvivalistChat() {
                  <span className="command-status-lamp is-active" />
                  Command node active // Live in-site AI
               </div>
-               <h1 className="font-mono text-xl font-bold uppercase tracking-wider text-foreground md:text-2xl">Survivalist GPT // Field Terminal</h1>
-              <p className="text-sm text-muted-foreground">Informational, educational, and research purposes only.</p>
+               <h1 className="font-mono text-base font-bold uppercase text-foreground md:text-2xl md:tracking-wider">Survivalist GPT</h1>
+              <p className="hidden text-sm text-muted-foreground sm:block">Informational, educational, and research purposes only.</p>
             </div>
           </div>
-           <div className="grid grid-cols-3 gap-2 font-mono text-[9px] uppercase text-muted-foreground sm:flex">
+           <div className="hidden grid-cols-3 gap-2 font-mono text-[9px] uppercase text-muted-foreground sm:flex">
             {headerStats.map((item) => (
                <div key={item.label} className="flex items-center justify-center gap-2 rounded-sm border border-border bg-secondary/60 px-3 py-2">
                 <item.icon className="h-3.5 w-3.5 text-survival-accent" />
@@ -440,14 +605,14 @@ export default function SurvivalistChat() {
         </aside>
 
         <Conversation className="min-h-0 min-w-0 flex-1 bg-background/85">
-        <ConversationContent className="gap-6 px-4 py-6 pb-8 md:px-6">
+        <ConversationContent className="gap-5 px-3 py-3 pb-5 md:px-6 md:py-6 md:pb-8">
           {messages.length === 0 ? (
-            <ConversationEmptyState className="min-h-[28rem] text-foreground md:min-h-[34rem]">
-               <div className="flex max-w-3xl flex-col items-center gap-4 md:gap-6">
+            <ConversationEmptyState className="min-h-0 justify-start py-2 text-foreground md:min-h-[30rem] md:justify-center">
+               <div className="flex max-w-3xl flex-col items-center gap-3 md:gap-6">
                 <img
                   src={survivalistMark}
                   alt="Survivalist GPT"
-                   className="h-20 w-20 rounded border border-survival-accent/40 bg-background object-cover shadow-2xl shadow-survival-accent/20 md:h-24 md:w-24"
+                    className="hidden h-20 w-20 rounded border border-survival-accent/40 bg-background object-cover shadow-2xl shadow-survival-accent/20 sm:block md:h-24 md:w-24"
                   width={1024}
                   height={1024}
                   loading="eager"
@@ -458,21 +623,21 @@ export default function SurvivalistChat() {
                     Ask questions. Get structured survival guidance.
                   </div>
                    <h2 className="font-mono text-2xl font-bold uppercase md:text-4xl">Your AI Survival Expert</h2>
-                  <p className="mx-auto max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
+                   <p className="mx-auto hidden max-w-2xl text-sm leading-6 text-muted-foreground sm:block md:text-base">
                     Upload an image, request current web research, or describe the situation. Survivalist GPT will outline, clarify, and guide toward lawful life-preserving actions.
                   </p>
                 </div>
-                <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-                  {starterPrompts.map((prompt) => (
+                <div className="grid w-full grid-cols-2 gap-2 sm:gap-3">
+                  {starterPrompts.map((starter) => (
                     <Button
-                      key={prompt}
+                      key={starter.prompt}
                       type="button"
                       variant="secondary"
-                      onClick={() => submitMessage(prompt, [])}
-                       className="command-mission-key h-auto justify-start whitespace-normal rounded-sm border border-border bg-secondary/80 px-4 py-3 text-left text-sm"
+                      onClick={() => submitMessage(starter.prompt, [])}
+                       className="command-mission-key min-h-12 h-auto justify-start whitespace-normal rounded-sm border border-border bg-secondary/80 px-3 py-2 text-left text-xs sm:text-sm"
                     >
                       <MessageCircle className="h-4 w-4 text-survival-accent" />
-                      {prompt}
+                      {starter.label}
                     </Button>
                   ))}
                 </div>
@@ -509,6 +674,28 @@ export default function SurvivalistChat() {
                         {text}
                       </MessageResponse>
                     )}
+                    {infographicByMessage[message.id] ? (
+                      <figure className="mt-4 overflow-hidden rounded-sm border border-survival-accent/30 bg-secondary/50 p-2">
+                        <img
+                          src={infographicByMessage[message.id].url}
+                          alt="Generated survival infographic"
+                          className={cn('mx-auto max-h-[38rem] w-full object-contain transition-all duration-500', !infographicByMessage[message.id].final && 'blur-md')}
+                        />
+                        {!infographicByMessage[message.id].final ? <figcaption className="py-2 text-center text-xs text-muted-foreground">Rendering field graphic…</figcaption> : null}
+                      </figure>
+                    ) : null}
+                    {message.role === 'assistant' && text && !isAssistantLoading ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => void toggleSpeech(message.id, text)}
+                        className="mt-3 min-h-10 border-survival-accent/30 bg-background/70"
+                      >
+                        {speakingMessageId === message.id ? <Square /> : <Volume2 />}
+                        {speakingMessageId === message.id ? 'Stop voice' : 'Listen'}
+                      </Button>
+                    ) : null}
                     {showCreditFallback ? (
                       <a
                         href={CHATGPT_SURVIVALIST_URL}
@@ -544,16 +731,29 @@ export default function SurvivalistChat() {
         </aside>
       </div>
 
-      <div className="relative z-20 border-t-2 border-border bg-background/95 p-3 md:p-4">
-        <div className="mb-3 flex items-center gap-2 overflow-x-auto pb-1 lg:hidden">
-          <LeverSwitch checked={commandModes.webIntel} label="Web intel" onCheckedChange={(checked) => setMode('webIntel', checked)} />
-          <LeverSwitch checked={commandModes.deepBrief} label="Deep brief" onCheckedChange={(checked) => setMode('deepBrief', checked)} />
-          <LeverSwitch checked={commandModes.lowLight} label="Low light" onCheckedChange={(checked) => setMode('lowLight', checked)} />
-        </div>
+      <div className="relative z-20 shrink-0 border-t-2 border-border bg-background/95 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:p-4">
+        <details className="group mb-2 lg:hidden">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between rounded-sm border border-border bg-secondary/70 px-3 font-mono text-xs font-bold uppercase text-foreground">
+            <span className="flex items-center gap-2"><SlidersHorizontal className="h-4 w-4 text-survival-accent" />Mission tools</span>
+            <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="grid grid-cols-2 gap-2 border-x border-b border-border bg-background/90 p-2">
+            <LeverSwitch checked={commandModes.webIntel} label="Web intel" onCheckedChange={(checked) => setMode('webIntel', checked)} />
+            <LeverSwitch checked={commandModes.deepBrief} label="Deep brief" onCheckedChange={(checked) => setMode('deepBrief', checked)} />
+            <LeverSwitch checked={commandModes.lowLight} label="Low light" onCheckedChange={(checked) => setMode('lowLight', checked)} />
+            <LeverSwitch checked={commandModes.infographic} label="Infographic" onCheckedChange={(checked) => setMode('infographic', checked)} />
+          </div>
+        </details>
         <PromptInputProvider>
+          <div className="mb-1.5 flex items-center justify-between px-1">
+            <label htmlFor="survivalist-command-input" className="flex items-center gap-2 font-mono text-xs font-black uppercase text-survival-brightAccent">
+              <Radio className="h-4 w-4" /> Ask Survivalist GPT
+            </label>
+            <span className="text-[10px] text-muted-foreground">Type or use voice</span>
+          </div>
           <PromptInput
             accept="image/*"
-             className="rounded-sm border-survival-accent/30 bg-background shadow-xl shadow-survival-accent/10"
+             className="command-composer rounded-sm border-2 border-survival-accent/60 bg-background shadow-xl shadow-survival-accent/20"
             globalDrop
             maxFileSize={5 * 1024 * 1024}
             maxFiles={3}
@@ -565,32 +765,56 @@ export default function SurvivalistChat() {
           >
             <AttachmentPreview />
             <PromptInputTextarea
-              className="min-h-20 px-4 text-base text-foreground placeholder:text-muted-foreground md:min-h-24"
-               placeholder={commandModes.webIntel ? 'TRANSMIT REQUEST // WEB INTEL ARMED...' : 'TRANSMIT SURVIVAL REQUEST...'}
+              id="survivalist-command-input"
+              autoFocus
+              className="min-h-16 px-4 py-3 text-base text-foreground placeholder:text-muted-foreground md:min-h-24"
+               placeholder={commandModes.infographic ? 'Describe the survival infographic you need…' : commandModes.webIntel ? 'Type your survival question — current web search is on…' : 'Type your survival question here…'}
               disabled={isBusy}
             />
-            <PromptInputFooter className="border-t border-survival-accent/15 bg-secondary/50 px-3 py-3">
-              <PromptInputTools>
+            <PromptInputFooter className="border-t border-survival-accent/20 bg-secondary/50 px-2 py-2 sm:px-3">
+              <PromptInputTools className="gap-1">
+                <VoiceInputControl disabled={isBusy} />
                 <PromptInputActionMenu>
-                  <PromptInputActionMenuTrigger tooltip="Add image or screenshot" disabled={isBusy}>
+                  <PromptInputActionMenuTrigger size="sm" className="h-11 min-w-11 px-3" tooltip="Add image or screenshot" disabled={isBusy}>
                     <ImageIcon className="h-4 w-4" />
+                    <span className="hidden sm:inline">Image</span>
                   </PromptInputActionMenuTrigger>
                   <PromptInputActionMenuContent>
                     <PromptInputActionAddAttachments label="Upload survival image" />
                     <PromptInputActionAddScreenshot label="Attach screenshot" />
                   </PromptInputActionMenuContent>
                 </PromptInputActionMenu>
-                 <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground sm:flex">
-                  <AlertTriangle className="h-3.5 w-3.5 text-survival-accent" />
-                  Lawful survival guidance only
-                </span>
+                <Button
+                  type="button"
+                  variant={commandModes.webIntel ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMode('webIntel', !commandModes.webIntel)}
+                  className="h-11 min-w-11 px-3"
+                  aria-pressed={commandModes.webIntel}
+                >
+                  <Search /><span className="hidden md:inline">Web</span>
+                </Button>
+                <Button
+                  type="button"
+                  variant={commandModes.infographic ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMode('infographic', !commandModes.infographic)}
+                  className="h-11 min-w-11 px-3"
+                  aria-pressed={commandModes.infographic}
+                >
+                  <WandSparkles /><span className="hidden md:inline">Graphic</span>
+                </Button>
               </PromptInputTools>
               <PromptInputSubmit
                 status={status}
                 onStop={stop}
                 disabled={status === 'submitted'}
-                 className="command-transmit bg-survival-accent text-survival-dark hover:bg-survival-brightAccent"
-              />
+                 size="sm"
+                 className="command-transmit h-11 min-w-11 bg-survival-accent px-3 font-black text-survival-dark hover:bg-survival-brightAccent sm:min-w-28"
+              >
+                {isBusy ? <Square /> : commandModes.infographic ? <WandSparkles /> : <Radio />}
+                <span className="hidden sm:inline">{isBusy ? 'Stop' : commandModes.infographic ? 'Create' : 'Send'}</span>
+              </PromptInputSubmit>
             </PromptInputFooter>
           </PromptInput>
         </PromptInputProvider>
