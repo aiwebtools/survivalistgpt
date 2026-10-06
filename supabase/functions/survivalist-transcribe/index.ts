@@ -28,7 +28,6 @@ Deno.serve(async (request) => {
     const form = new FormData()
     form.append('model', 'openai/gpt-transcribe')
     form.append('file', file, file.name || 'survivalist-voice.wav')
-    form.append('response_format', 'json')
     form.append('stream', 'true')
     form.append('prompt', 'Survival and emergency preparedness terminology. Return only the spoken transcript.')
 
