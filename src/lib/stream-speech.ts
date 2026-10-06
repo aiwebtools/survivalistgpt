@@ -44,7 +44,13 @@ export async function streamSpeech(endpoint: string, text: string, headers: Head
     let streamError = '';
     const parser = createParser({
       onEvent(event) {
-        const payload = JSON.parse(event.data) as { type?: string; audio?: string; error?: { message?: string } };
+        if (event.data === '[DONE]') return;
+        let payload: { type?: string; audio?: string; error?: { message?: string } };
+        try {
+          payload = JSON.parse(event.data);
+        } catch {
+          return;
+        }
         if (payload.type === 'error' || payload.error) {
           streamError = payload.error?.message ?? 'Spoken reply failed.';
           return;

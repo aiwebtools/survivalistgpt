@@ -201,7 +201,13 @@ function VoiceInputControl({ disabled }: { disabled: boolean }) {
       let streamError = '';
       const parser = createParser({
         onEvent(event) {
-          const payload = JSON.parse(event.data) as { type?: string; delta?: string; text?: string; error?: { message?: string } };
+          if (event.data === '[DONE]') return;
+          let payload: { type?: string; delta?: string; text?: string; error?: { message?: string } };
+          try {
+            payload = JSON.parse(event.data);
+          } catch {
+            return;
+          }
           if (payload.type === 'error' || payload.error) streamError = payload.error?.message ?? 'Voice transcription failed.';
           if (payload.type === 'transcript.text.delta' && payload.delta) transcript += payload.delta;
           if (payload.type === 'transcript.text.done' && payload.text) finalText = payload.text;
