@@ -34,6 +34,10 @@ type ChatMessage = {
 
 type ChatRequestBody = {
   messages?: ChatMessage[]
+  modes?: {
+    webIntel?: boolean
+    deepBrief?: boolean
+  }
 }
 
 const encoder = new TextEncoder()
@@ -222,12 +226,18 @@ Deno.serve(async (request) => {
     return json({ message: 'Ask Survivalist GPT a question or upload an image.' }, 400)
   }
 
-  const searchContext = userText && shouldSearch(userText) ? await searchWeb(userText, request.signal) : ''
+  const webIntel = payload.modes?.webIntel === true
+  const deepBrief = payload.modes?.deepBrief === true
+  const searchContext = userText && (webIntel || shouldSearch(userText)) ? await searchWeb(userText, request.signal) : ''
   const input = buildResponsesInput(messages, searchContext)
+  const modeInstructions = [
+    webIntel ? 'Web Intel is enabled. Use supplied current web snippets when relevant, cite their URLs, and state when current results are unavailable.' : 'Web Intel is disabled unless the request clearly requires current information.',
+    deepBrief ? 'Deep Brief is enabled. Give a thorough structured field briefing while remaining practical.' : 'Deep Brief is disabled. Be concise while preserving essential safety steps.',
+  ].join('\n')
 
   const gatewayBody = {
     model: 'openai/gpt-6-astra',
-    instructions: SYSTEM_PROMPT,
+    instructions: `${SYSTEM_PROMPT}\n\nCurrent command modes:\n${modeInstructions}`,
     input,
     stream: true,
     store: false,
