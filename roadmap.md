@@ -4,3 +4,8 @@
 - [x] Restyle the in-site AI as a rugged tactical field terminal.
 - [x] Add functional physical lever switches for web intel, deep briefing, and low-light display.
 - [x] Verify the command hub on desktop and mobile without changing existing links or chat behavior.
+- [x] Make the phone composer and starter prompts immediately visible and easy to understand.
+- [x] Add voice recording with transcription and natural spoken assistant replies.
+- [x] Add in-chat survival infographic generation.
+- [x] Preserve and clarify image analysis, web search, safety, and credit fallback controls.
+- [x] Verify all upgraded chat capabilities on phone and desktop.
